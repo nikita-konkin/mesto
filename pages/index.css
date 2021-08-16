@@ -7,9 +7,20 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/_active/form_active.css);
+@import url(../blocks/form/__header/form__header.css);
+@import url(../blocks/form/__name/form__name.css);
+@import url(../blocks/form/__career/form__career.css);
+@import url(../blocks/form/__submit/form__submit.css);
+@import url(../blocks/form/__close-button/profile__close-button.css);
+
+@import url(../blocks/overlay/overlay.css);
+@import url(../blocks/overlay/_active/overlay_active.css);
 
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__description-wrap/profile__description-wrap.css);
 @import url(../blocks/profile/__description/profile__description.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__career/profile__career.css);

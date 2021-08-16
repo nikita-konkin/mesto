@@ -4,4 +4,6 @@
 	max-height: 361px;
 	border-radius: 25px;
 	overflow: hidden;
+
+	justify-self: center;
 }

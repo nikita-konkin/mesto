@@ -4,3 +4,11 @@
 
 	display: flex;
 }
+
+@media screen and (max-width: 768px){
+	.profile{
+		margin-top: 42px;
+		flex-direction: column;
+		align-items: center;
+	}
+}

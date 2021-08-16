@@ -1,3 +1,15 @@
 .profile__edit-button{
 	margin: 37px auto auto 18px;
 }
+.profile__edit-button:hover{
+	opacity: 50%;
+	cursor: pointer;
+}
+@media screen and (max-width: 320px){
+
+	.profile__edit-button{
+		margin: 30px auto auto 10px;
+		max-width: 18px;
+	}
+
+}

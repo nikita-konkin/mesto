@@ -1,3 +1,17 @@
 .profile__add-button{
 	margin: 35px 0 auto auto;
 }
+
+.profile__add-button:hover{
+	opacity: 50%;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 768px){
+	.profile__add-button{
+
+		margin: 0px auto;
+		min-width: 282px;
+		min-height: 50px;
+	}
+}

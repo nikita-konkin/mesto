@@ -8,3 +8,12 @@
 
 	margin: 0;
 }
+
+@media screen and (max-width: 320px){
+
+	.profile__career{
+		font-size: 14px;
+		line-height: 17px;
+	}
+
+}
