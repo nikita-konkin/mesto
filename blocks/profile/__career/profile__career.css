@@ -14,9 +14,10 @@
 	white-space: nowrap;
 }
 
-@media screen and (max-width: 320px){
+@media screen and (max-width: 425px){
 
 	.profile__career{
+		max-width: 240px;
 		font-size: 14px;
 		line-height: 17px;
 	}
