@@ -3,7 +3,8 @@
   padding: 0px;
   box-sizing: border-box;
   width: 100%;
-  min-height: 1380px;
+  height: 100vh;
+  min-width:  320px;
   align-content: center;
   background-color: black;
 
@@ -16,3 +17,11 @@
   -webkit-font-smoothing: antialiased;
 
   }
+
+@media screen and (max-width:  768px){
+  .root{
+
+    height: 100%;
+
+  }
+}
