@@ -1,8 +1,10 @@
 .popup__close-button{
-  position: absolute;
-  top: 34%;
-  left: 65%;
-
+	position: relative;
+	top: -8px;
+	left: 201px;
+	background-image: url('../../../images/close_button.svg');
+	min-width: 32px;
+	min-height: 32px;
 	background-color: transparent;
 	border: 0;
 	padding: 0;
@@ -18,9 +20,10 @@
 
 @media screen and (max-width: 425px){
 	.popup__close-button{
-		position: fixed;
-		top: 34%;
-    left: 81%;
-		max-width: 20px;
+		background-image: url('../../../images/close_button_mobile.svg');
+		top: -18px;
+		left: 110px;
+		min-width: 20px;
+		min-height: 20px;
 	}
 }

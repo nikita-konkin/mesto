@@ -1,7 +1,7 @@
 
 let form = document.querySelector('.form');
 let formName = document.querySelector('.decription-input_type_name');
-let formCareer = document.querySelector('.decription-input_type_career');
+let formCareer = document.querySelector('.form__decription-input_type_career');
 let formSubmit = document.querySelector('.form__submit')
 
 let popup = document.querySelector('.popup');
@@ -11,10 +11,6 @@ let popupCloseButton = document.querySelector('.popup__close-button');
 
 let profileEditButton = document.querySelector('.profile__edit-button');
 
-
-profileEditButton.addEventListener('click',  Open_form);
-popupCloseButton.addEventListener('click', Close_form);
-formSubmit.addEventListener('click', Submit_form);
 
 // let addButton = document.querySelector('.profile__add-button')
 // let likeButton = document.querySelector('.element__like')
@@ -40,7 +36,7 @@ formSubmit.addEventListener('click', Submit_form);
 
 // console.log(screen.width)
 
-function Open_form(){
+function openPopap(){
 
 	popup.classList.toggle('popup_opened');
 	formName.value = profileName.textContent;
@@ -48,18 +44,18 @@ function Open_form(){
 
 }
 
-function Close_form(){
+function closePopap(){
 
 	popup.classList.toggle('popup_opened');
 }
 
-function Submit_form(evt){
+function submitForm(evt){
 
 	evt.preventDefault(); 
 	profileName.textContent = formName.value;
 	profileCareer.textContent = formCareer.value;
 
-	popup.classList.toggle('popup_opened');
+	closePopap()
 
 }
 
@@ -86,3 +82,7 @@ function Submit_form(evt){
 
 
 // }
+
+profileEditButton.addEventListener('click',  openPopap);
+popupCloseButton.addEventListener('click', closePopap);
+formSubmit.addEventListener('click', submitForm);
