@@ -10,7 +10,7 @@
 	text-align: left;
 }
 
-@media screen and (max-width: 425px){
+@media screen and (max-width: 525px){
 	.form__header{
 		font-size: 18px;
 		line-height: 22px;

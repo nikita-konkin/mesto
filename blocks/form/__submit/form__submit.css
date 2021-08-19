@@ -21,7 +21,7 @@
 	cursor: pointer;
 }
 
-@media screen and (max-width: 425px){
+@media screen and (max-width: 525px){
 	.form__submit{
 		margin: 45px auto 25px auto;
 
