@@ -22,12 +22,22 @@
         <button type="button" class="popup__close-button"></button>
           <form name="profile-edit-form" class="form">
             <h2 class="form__header">Редактировать профиль</h2>
-            <input type="text" id="name" name="name" class="form__decription-input form__decription-input_type_name">
-            <input type="text" id="career" name="career" class="form__decription-input form__decription-input_type_career">
+            <input type="text" id="form__decription"  class="form__decription-input form__decription-input_type_name">
+            <input type="text" id="form__decription"  class="form__decription-input form__decription-input_type_career">
             <button type="submit" class="form__submit">Сохранить</button>
           </form>
       </div>
     </div>
+
+    <template id="element">
+        <article class="element"  aria-label="article">
+          <img src="" alt="" class="element__user-photo">
+          <div class="element__user-photo-description">
+            <h2 class="element__user-photo-text"></h2>
+            <button type="button" class="element__like"></button>
+          </div>
+        </article> 
+    </template>
 
     <main class="content">
       
@@ -50,7 +60,7 @@
 
       <section class="elements" aria-label="article">
 
-        <article class="element"  aria-label="article">
+       <!--  <article class="element"  aria-label="article">
           <img src="images/photo_jellyfish.jpg" alt="Фото гигантских медух" class="element__user-photo">
           <div class="element__user-photo-description">
             <h2 class="element__user-photo-text">Гигантские медузы</h2>
@@ -96,7 +106,7 @@
             <h2 class="element__user-photo-text">Зангжиажие</h2>
             <button type="button" class="element__like"></button>
           </div>
-        </article>
+        </article> -->
 
       </section>
 

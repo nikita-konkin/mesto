@@ -1,6 +1,6 @@
 .element__user-photo{
 	max-width: 282px;
-	max-height: 282px;
+	min-height: 282px;
 	width: 100%;
 	object-fit: cover
 }
