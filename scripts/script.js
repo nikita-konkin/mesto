@@ -12,7 +12,8 @@ let popupCloseButton = document.querySelector('.popup__close-button');
 
 let profileEditButton = document.querySelector('.profile__edit-button');
 let profileAddButton = document.querySelector('.profile__add-button');
-let initialCards = [
+
+var initialCards = [
   {
     name: 'Она',
     link: 'https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iQd9BBvgU_DU/v1/1000x-1.jpg'
@@ -38,22 +39,49 @@ let initialCards = [
     link: 'https://cutewallpaper.org/21/avatar-hd]/Avatar-HD-Wallpapers-7wallpapers.net.jpg'
   }
 ];
-createElements(initialCards)
 
+createElements(initialCards)
 
 
 function createElements(initialCards){
 
 	const container = document.querySelector('.elements');
+	container.textContent = '';
+
+
 
 	initialCards.forEach(function(item){
 		
-		const userTemplate = document.querySelector('#element').content.cloneNode(true);
+		const template = document.querySelector('#element').content;
+		const userTemplate = template.querySelector('.element').cloneNode(true)
+
 		userTemplate.querySelector('.element__user-photo').src = item.link;
 		userTemplate.querySelector('.element__user-photo-text').textContent = item.name;
-		container.append(userTemplate);
+
+		userTemplate.querySelector('.element__trash-button').addEventListener('click', function(evt){
+			
+			let listItem = userTemplate.querySelector('.element__trash-button')
+			// userTemplate.remove();
+			let src = userTemplate.querySelector('.element__user-photo').src
+			let name = userTemplate.querySelector('.element__user-photo-text').textContent
+			// console.log(name, src)
+			// console.log(initialCards[0].name, initialCards[0].link)
+			let filtered = initialCards.filter(function(list) {
+
+				return !(list.link.includes(src)) && !(list.name.includes(name));
+			});
+
+			createElements(filtered)
+			// console.log(result)
 
 		});
+
+		container.append(userTemplate);
+
+		
+
+	});
+
 
 }
 
@@ -73,12 +101,14 @@ function openPopupAddProfilePhoto(){
 
 	popup.classList.toggle('popup_opened');
 	document.querySelector('.form__header').textContent = 'Новое место';
-	document.querySelector('.form__decription-input_type_name').classList.add('form__decription-input_type_photo');
-	document.querySelector('.form__decription-input_type_career').classList.add('form__decription-input_type_photo');
+	formName.classList.add('form__decription-input_type_photo');
+	formCareer.classList.add('form__decription-input_type_photo');
 	form.classList.add('form_type_photo');
 	
-	formName.value = 'Название';
-	formCareer.value = 'Ссылка на картинку';
+	formName.value = "";
+	formCareer.value = "";
+	formName.placeholder = "Название";
+	formCareer.placeholder = "Ссылка на картинку";
 
 }
 
@@ -86,8 +116,8 @@ function closePopup(){
 
 	popup.classList.toggle('popup_opened');
 	form.classList.remove('form_type_photo');
-	document.querySelector('.form__decription-input_type_name').classList.remove('form__decription-input_type_photo');
-	document.querySelector('.form__decription-input_type_career').classList.remove('form__decription-input_type_photo');
+	formName.classList.remove('form__decription-input_type_photo');
+	formCareer.classList.remove('form__decription-input_type_photo');
 	form.classList.remove('form_type_profile');
 }
 
@@ -114,9 +144,12 @@ function submitProfile(){
 }
 
 function submitPhotoElement(){
-	initialCards.unshift({name: 'Я и медузки', link: 'https://cutewallpaper.org/21/avatar-hd]/Avatar-HD-Wallpapers-7wallpapers.net.jpg'});
-	console.log(initialCards)
+	initialCards.unshift({name: formName.value, link: formCareer.value});
 	createElements(initialCards)
+}
+
+function removePhotoElement(evt){
+	console.log(evt.target)
 }
 
 // function Liked(clicked_id){
@@ -146,6 +179,8 @@ function submitPhotoElement(){
 profileEditButton.addEventListener('click',  openPopupEdirProfile);
 profileAddButton.addEventListener('click',  openPopupAddProfilePhoto);
 popupCloseButton.addEventListener('click', closePopup);
+
+
 
 form.addEventListener('submit', submitForm);
 // formSubmit.addEventListener('click', submitForm);
