@@ -1,0 +1,7 @@
+.element__like_liked{
+	opacity: 100%;
+	background-image: url('../../../../images/like_button_active.svg');
+	width: 22px;
+	height: 18px;
+	background-size: cover;
+}

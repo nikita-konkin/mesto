@@ -1,9 +1,7 @@
 
 let form = document.querySelector('.form');
-// let form = document.getElementsByTagName('.profile-edit-form');
 let formName = document.querySelector('.form__decription-input_type_name');
 let formCareer = document.querySelector('.form__decription-input_type_career');
-// let formSubmit = document.querySelector('.form__submit')
 
 let popup = document.querySelector('.popup');
 let profileName = document.querySelector('.profile__name');
@@ -13,7 +11,9 @@ let popupCloseButton = document.querySelector('.popup__close-button');
 let profileEditButton = document.querySelector('.profile__edit-button');
 let profileAddButton = document.querySelector('.profile__add-button');
 
-var initialCards = [
+var listCards = new Array; 
+let initialCards = [
+
   {
     name: 'Она',
     link: 'https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iQd9BBvgU_DU/v1/1000x-1.jpg'
@@ -38,47 +38,92 @@ var initialCards = [
     name: 'Я и медузки',
     link: 'https://cutewallpaper.org/21/avatar-hd]/Avatar-HD-Wallpapers-7wallpapers.net.jpg'
   }
+
 ];
 
-createElements(initialCards)
+cardsArray(initialCards);
+
+function cardsArray(value){
+
+	listCards = [];
+	return listCards = value;
+}
+
+createElements(listCards)
 
 
 function createElements(initialCards){
 
 	const container = document.querySelector('.elements');
+	const containerPopup = document.querySelector('.content');
 	container.textContent = '';
-
-
 
 	initialCards.forEach(function(item){
 		
 		const template = document.querySelector('#element').content;
-		const userTemplate = template.querySelector('.element').cloneNode(true)
+		const elementTemplate = template.querySelector('.element').cloneNode(true)
 
-		userTemplate.querySelector('.element__user-photo').src = item.link;
-		userTemplate.querySelector('.element__user-photo-text').textContent = item.name;
+		const popupTemplate = document.querySelector('.popup').cloneNode(false)
 
-		userTemplate.querySelector('.element__trash-button').addEventListener('click', function(evt){
-			
-			let listItem = userTemplate.querySelector('.element__trash-button')
-			// userTemplate.remove();
-			let src = userTemplate.querySelector('.element__user-photo').src
-			let name = userTemplate.querySelector('.element__user-photo-text').textContent
-			// console.log(name, src)
-			// console.log(initialCards[0].name, initialCards[0].link)
-			let filtered = initialCards.filter(function(list) {
+		elementTemplate.querySelector('.element__user-photo').src = item.link;
+		elementTemplate.querySelector('.element__user-photo-text').textContent = item.name;
 
+		elementTemplate.querySelector('.element__user-photo').addEventListener('click', function(evt){
+
+			popupTemplate.style.backgroundColor = "rgba(0, 0, 0, .9)";
+			popupTemplate.classList.add('popup_opened');
+			const photoContainer = document.createElement('div');
+			photoContainer.classList.add('popup__container')
+			photoContainer.classList.add('popup__container_type_photo')
+
+			const photo = document.createElement('img');
+			photo.src = elementTemplate.querySelector('.element__user-photo').src
+
+
+			let photoDescription = elementTemplate.querySelector('.element__user-photo').closest("article");
+			photoDescription = photoDescription.querySelector('.element__user-photo-text').textContent;
+			photoDescriptionPopup = document.createElement('h2');
+			photoDescriptionPopup.textContent = photoDescription
+			photoDescriptionPopup.classList.add('popup__photo-descriprion')
+
+			const popupCloseButton = document.createElement('button');
+			popupCloseButton.classList.add('popup__close-button')
+
+			popupCloseButton.addEventListener('click',function(evt){
+				popupTemplate.classList.toggle('popup_opened');
+				photoContainer.remove()
+				popupTemplate.remove()
+			})
+
+			photoContainer.append(photo)
+			photoContainer.append(photoDescriptionPopup)
+			photoContainer.append(popupCloseButton)
+			popupTemplate.append(photoContainer)
+			containerPopup.append(popupTemplate);
+
+		});
+
+		elementTemplate.querySelector('.element__like').addEventListener('click', function(evt){
+			elementTemplate.querySelector('.element__like').classList.toggle('element__like_liked')
+		});
+
+		elementTemplate.querySelector('.element__trash-button').addEventListener('click', function(evt){
+
+			const src = elementTemplate.querySelector('.element__user-photo').src
+			const name = elementTemplate.querySelector('.element__user-photo-text').textContent
+
+			const filtered = initialCards.filter(function(list) {
 				return !(list.link.includes(src)) && !(list.name.includes(name));
 			});
 
-			createElements(filtered)
+			initialCards = cardsArray(filtered);
+
+			createElements(initialCards)
 			// console.log(result)
 
 		});
 
-		container.append(userTemplate);
-
-		
+		container.append(elementTemplate);
 
 	});
 
@@ -93,7 +138,6 @@ function openPopupEdirProfile(){
 	formName.value = profileName.textContent;
 	formCareer.value = profileCareer.textContent;
 	form.classList.add('form_type_profile');
-	
 
 }
 
@@ -137,50 +181,27 @@ function submitForm(evt){
 	closePopup();
 
 }
-
+                                                                                                                                                                                                    
 function submitProfile(){
 	profileName.textContent = formName.value;
 	profileCareer.textContent = formCareer.value;
 }
 
 function submitPhotoElement(){
-	initialCards.unshift({name: formName.value, link: formCareer.value});
-	createElements(initialCards)
+
+	if (formName.value !== "" || formCareer.value !== ""){
+		let listAddCards = listCards.unshift({name: formName.value, link: formCareer.value});
+		initialCards = cardsArray(listCards);
+		createElements(initialCards);
+	} else {
+		alert('Не заполнено одно из полей')
+	}
+
 }
-
-function removePhotoElement(evt){
-	console.log(evt.target)
-}
-
-// function Liked(clicked_id){
-
-// 	let likeButton_id = clicked_id.id
-// 	// console.log(likeButton_id)
-
-// 	for(var i in dict){
-// 	    if(dict[i].key == likeButton_id){
-
-// 	    	if (dict[i].value == 0){
-// 				document.getElementById(clicked_id.id).src = "images/likeButton_active.svg";
-// 				dict[i].value = 1
-// 			} else {
-// 				document.getElementById(clicked_id.id).src = "images/likeButton.svg";
-// 				dict[i].value = 0
-// 			}
-
-// 	    }
-// 	}
-
-// 	// console.log(dict)
-
-
-// }
 
 profileEditButton.addEventListener('click',  openPopupEdirProfile);
 profileAddButton.addEventListener('click',  openPopupAddProfilePhoto);
 popupCloseButton.addEventListener('click', closePopup);
-
-
 
 form.addEventListener('submit', submitForm);
 // formSubmit.addEventListener('click', submitForm);
@@ -208,3 +229,28 @@ form.addEventListener('submit', submitForm);
 // }
 
 // console.log(screen.width)
+
+
+// function Liked(clicked_id){
+
+// 	let likeButton_id = clicked_id.id
+// 	// console.log(likeButton_id)
+
+// 	for(var i in dict){
+// 	    if(dict[i].key == likeButton_id){
+
+// 	    	if (dict[i].value == 0){
+// 				document.getElementById(clicked_id.id).src = "images/likeButton_active.svg";
+// 				dict[i].value = 1
+// 			} else {
+// 				document.getElementById(clicked_id.id).src = "images/likeButton.svg";
+// 				dict[i].value = 0
+// 			}
+
+// 	    }
+// 	}
+
+// 	// console.log(dict)
+
+
+// }
