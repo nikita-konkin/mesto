@@ -24,7 +24,7 @@ let initialCards = [
   },
   {
     name: 'Гиагнтысие медузы',
-    link: 'https://images.wallpapersden.com/image/download/avatar-movie_a21qamaUmZqaraWkpJRmbmdlrWZlbWU.jpg'
+    link: 'https://thumb.spokesman.com/byon-p8oC8HNoj80DvpTNR8ztKc=/2500x1875/smart/media.spokesman.com/photos/2017/05/13/TRAVEL_UST-DISNEY-PANDORA_9_LA_LvY02dP.jpg'
   },
   {
     name: 'Левитирующие горы',
