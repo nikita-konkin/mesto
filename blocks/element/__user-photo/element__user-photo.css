@@ -2,7 +2,7 @@
 	max-width: 282px;
 	min-height: 282px;
 	width: 100%;
-	object-fit: cover
+	object-fit: cover;
 }
 
 .element__user-photo:hover{
