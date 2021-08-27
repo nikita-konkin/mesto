@@ -1,4 +1,4 @@
-.form__header{
+.form-profile__header{
 	padding: 0;
 	font-style: normal;
 	font-weight: 900;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (max-width: 525px){
-	.form__header{
+	.form-profile__header{
 		font-size: 18px;
 		line-height: 22px;
 

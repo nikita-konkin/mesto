@@ -1,12 +1,12 @@
-.popup_opened{
+.popup-photo_opened{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	animation: popup_open 0.5s ease forwards;
+	animation: popup-photo_open 0.5s ease forwards;
 
 }
 
-@keyframes popup_open{
+@keyframes popup-photo_open{
 
 	from {
 		opacity: 0;

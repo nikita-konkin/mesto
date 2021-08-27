@@ -1,4 +1,4 @@
-.form__decription-input{
+.form-photo__decription-input{
 	padding: 0;
 	padding-bottom: 13px;
 	border: 0;
@@ -17,23 +17,27 @@
 	color: black;
 }
 
-.form__decription-input:nth-child(even){
+.form-photo__decription-input:nth-child(even){
 	margin: 44px auto 0 auto;
 }
 
-.form__decription-input:nth-child(odd){
+.form-photo__decription-input:nth-child(odd){
 	margin: 25px auto 0 auto;
 }
 
 @media screen and (max-width: 525px){
 
-	.form__decription-input:nth-child(even){
+	.form-photo__decription-input:nth-child(even){
 		margin: 70px auto 0 auto;
 		max-width: 238px;
 	}
 
-	.form__decription-input:nth-child(odd){
+	.form-photo__decription-input:nth-child(odd){
 		max-width: 238px;
 	}
+}
+
+.form-photo__decription-input: :placeholder{
+	color: rgba(196, 196, 196, 1);
 }
 

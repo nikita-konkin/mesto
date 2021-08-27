@@ -17,14 +17,26 @@
       <img src="images/logo.svg" class="header__logo" alt="Логотип">
     </header>
 
-    <div class="popup">
-      <div class="popup__container">
-        <button type="button" class="popup__close-button"></button>
-          <form name="profile-edit-form" class="form">
-            <h2 class="form__header">Редактировать профиль</h2>
-            <input type="text" name="name"  class="form__decription-input form__decription-input_type_name">
-            <input type="text" name="career"  class="form__decription-input form__decription-input_type_career">
-            <button type="submit" class="form__submit">Сохранить</button>
+    <div class="popup-profile">
+      <div class="popup-profile__container">
+        <button type="button" class="popup-profile__close-button"></button>
+          <form name="profile-edit-form" class="form-profile">
+            <h2 class="form-profile__header">Редактировать профиль</h2>
+            <input type="text" name="name"  class="form-profile__decription-input form-profile__decription-input_type_name">
+            <input type="text" name="career"  class="form-profile__decription-input form-profile__decription-input_type_career">
+            <button type="submit" class="form-profile__submit">Сохранить</button>
+          </form>
+      </div>
+    </div>
+
+    <div class="popup-photo">
+      <div class="popup-photo__container">
+        <button type="button" class="popup-photo__close-button"></button>
+          <form name="photo-edit-form" class="form-photo">
+            <h2 class="form-photo__header">Новое место</h2>
+            <input type="text" name="name"  class="form-photo__decription-input form-photo__decription-input_type_name">
+            <input type="text" name="link"  class="form-photo__decription-input form-photo__decription-input_type_link">
+            <button type="submit" class="form-photo__submit">Сохранить</button>
           </form>
       </div>
     </div>
@@ -39,6 +51,7 @@
           </div>
         </article> 
     </template>
+
 
     <main class="content">
       

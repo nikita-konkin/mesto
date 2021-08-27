@@ -1,4 +1,4 @@
-.popup__container{
+.popup-profile__container{
 	position: relative;
 
 	transition: 200ms ease;
@@ -20,7 +20,7 @@
 }
 
 @media screen and (max-width: 525px){
-	.popup__container{
+	.popup-profile__container{
 		max-width: 282px;
 		/*min-height: 322px;*/
 

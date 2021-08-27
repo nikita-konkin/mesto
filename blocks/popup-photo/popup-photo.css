@@ -1,4 +1,4 @@
-.popup{
+.popup-photo{
 	display: none;
 	position: fixed;
 	transition: 1000ms ease-in-out;

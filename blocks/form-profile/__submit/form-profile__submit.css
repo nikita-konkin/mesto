@@ -1,4 +1,4 @@
-.form__submit{
+.form-profile__submit{
 	border: 0;
 	margin: 48px auto 37px auto;
 
@@ -16,13 +16,13 @@
 	border-radius: 2px;
 }
 
-.form__submit:hover{
+.form-profile__submit:hover{
 	opacity: 0.8;
 	cursor: pointer;
 }
 
 @media screen and (max-width: 525px){
-	.form__submit{
+	.form-profile__submit{
 		margin: 45px auto 25px auto;
 
 		max-width: 238px;
