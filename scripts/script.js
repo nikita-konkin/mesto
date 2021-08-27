@@ -13,6 +13,9 @@ const formPhotoLink = document.querySelector('.form-photo__decription-input_type
 const popupProfile = document.querySelector('.popup-profile');
 const popupProfileCloseButton = document.querySelector('.popup-profile__close-button');
 
+const popupAddPhoto = document.querySelector('.popup-add-photo');
+const popupAddPhotoCloseButton = document.querySelector('.popup-add-photo__close-button');
+
 const popupPhoto = document.querySelector('.popup-photo');
 const popupPhotoCloseButton = document.querySelector('.popup-photo__close-button');
 
@@ -59,14 +62,14 @@ function createElements(initialCards){
 	initialCards.forEach(function(item){
 		
 		const template = document.querySelector('#element').content;
-		const elementTemplate = template.querySelector('.element').cloneNode(true)
+		const elementTemplate = template.querySelector('.element').cloneNode(true);
 
 		elementTemplate.querySelector('.element__user-photo').src = item.link;
 		elementTemplate.querySelector('.element__user-photo-text').textContent = item.name;
 
 		elementTemplate.querySelector('.element__like').addEventListener('click', function(evt){
 
-			elementTemplate.querySelector('.element__like').classList.toggle('element__like_liked')
+			elementTemplate.querySelector('.element__like').classList.toggle('element__like_liked');
 
 		});
 
@@ -77,10 +80,24 @@ function createElements(initialCards){
 
 		});
 
+		elementTemplate.querySelector('.element__user-photo').addEventListener('click', function(evt){
+
+			const photo = elementTemplate.querySelector('.element__user-photo').src;
+			const photoDescription = elementTemplate.querySelector('.element__user-photo-text').textContent;
+			popupPhoto.querySelector('.popup-photo__img').src = photo;
+			popupPhoto.querySelector('.popup-photo__photo-descriprion').textContent = photoDescription;
+
+			popupPhotoCloseButton.addEventListener('click', function(evt){
+				popupPhoto.classList.remove('popup-photo_opened');
+			});
+
+			popupPhoto.classList.add('popup-photo_opened');
+
+		});
+
 		container.append(elementTemplate);
 
 	});
-
 
 }
 
@@ -95,7 +112,7 @@ function openPopupEditProfile(){
 
 function openPopupAddProfilePhoto(){
 
-	popupPhoto.classList.toggle('popup-photo_opened');
+	popupAddPhoto.classList.toggle('popup-add-photo_opened');
 
 	formPhotoName.placeholder = "Название";
 	formPhotoLink.placeholder = "Ссылка на картинку";
@@ -105,7 +122,7 @@ function openPopupAddProfilePhoto(){
 function closePopup(){
 
 	popupProfile.classList.remove('popup-profile_opened');
-	popupPhoto.classList.remove('popup-photo_opened');
+	popupAddPhoto.classList.remove('popup-add-photo_opened');
 
 }
 
@@ -132,7 +149,7 @@ profileAddButton.addEventListener('click',  openPopupAddProfilePhoto);
 
 popupProfileCloseButton.addEventListener('click', closePopup);
 
-popupPhotoCloseButton.addEventListener('click', closePopup);
+popupAddPhotoCloseButton.addEventListener('click', closePopup);
 
 formProfile.addEventListener('submit', submitProfileForm);
 formPhoto.addEventListener('submit', submitPhotoElement);
