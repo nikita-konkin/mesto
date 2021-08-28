@@ -10,17 +10,22 @@ const formPhoto = document.querySelector('.form-photo');
 const formPhotoName = document.querySelector('.form-photo__decription-input_type_name');
 const formPhotoLink = document.querySelector('.form-photo__decription-input_type_link');
 
-const popupProfile = document.querySelector('.popup-profile');
+const popupProfile = document.querySelector('.popup_profile');
 const popupProfileCloseButton = document.querySelector('.popup-profile__close-button');
 
-const popupAddPhoto = document.querySelector('.popup-add-photo');
+const popupAddPhoto = document.querySelector('.popup_add-photo');
 const popupAddPhotoCloseButton = document.querySelector('.popup-add-photo__close-button');
 
-const popupPhoto = document.querySelector('.popup-photo');
+const popupPhoto = document.querySelector('.popup_photo');
 const popupPhotoCloseButton = document.querySelector('.popup-photo__close-button');
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
+
+const template = document.querySelector('#element').content;
+const container = document.querySelector('.elements');
+container.textContent = '';
+
 
 
 let initialCards = [
@@ -52,58 +57,68 @@ let initialCards = [
 
 ];
 
-createElements(initialCards)
+initialCards.forEach((data) => renderCard(createCard(data)));
 
-function createElements(initialCards){
+function createCard(data){
 
-	const container = document.querySelector('.elements');
-	container.textContent = '';
+	const elementTemplate = template.querySelector('.element').cloneNode(true);
+	
+	elementTemplate.querySelector('.element__user-photo').src = data.link;
+	elementTemplate.querySelector('.element__user-photo-text').textContent = data.name;
 
-	initialCards.forEach(function(item){
-		
-		const template = document.querySelector('#element').content;
-		const elementTemplate = template.querySelector('.element').cloneNode(true);
+	elementTemplate.querySelector('.element__like').addEventListener('click', function(evt){
 
-		elementTemplate.querySelector('.element__user-photo').src = item.link;
-		elementTemplate.querySelector('.element__user-photo-text').textContent = item.name;
-
-		elementTemplate.querySelector('.element__like').addEventListener('click', function(evt){
-
-			elementTemplate.querySelector('.element__like').classList.toggle('element__like_liked');
-
-		});
-
-		elementTemplate.querySelector('.element__trash-button').addEventListener('click', function(evt){
-
-			let elementRemove = elementTemplate.querySelector('.element__trash-button').closest("article");
-			elementRemove.remove()
-
-		});
-
-		elementTemplate.querySelector('.element__user-photo').addEventListener('click', function(evt){
-
-			const photo = elementTemplate.querySelector('.element__user-photo').src;
-			const photoDescription = elementTemplate.querySelector('.element__user-photo-text').textContent;
-			popupPhoto.querySelector('.popup-photo__img').src = photo;
-			popupPhoto.querySelector('.popup-photo__photo-descriprion').textContent = photoDescription;
-
-			popupPhotoCloseButton.addEventListener('click', function(evt){
-				popupPhoto.classList.remove('popup-photo_opened');
-			});
-
-			popupPhoto.classList.add('popup-photo_opened');
-
-		});
-
-		container.append(elementTemplate);
+		elementTemplate.querySelector('.element__like').classList.toggle('element__like_liked');
 
 	});
+
+	elementTemplate.querySelector('.element__trash-button').addEventListener('click', function(evt){
+
+		let elementRemove = elementTemplate.querySelector('.element__trash-button').closest("article");
+		elementRemove.remove();
+
+	});
+
+	elementTemplate.querySelector('.element__user-photo').addEventListener('click', function(evt){
+
+		const photo = elementTemplate.querySelector('.element__user-photo').src;
+		const photoDescription = elementTemplate.querySelector('.element__user-photo-text').textContent;
+		popupPhoto.querySelector('.popup-photo__img').src = photo;
+		popupPhoto.querySelector('.popup-photo__photo-descriprion').textContent = photoDescription;
+
+		popupPhotoCloseButton.addEventListener('click', function(evt){
+			popupPhoto.classList.remove('popup_opened');
+		});
+
+		popupPhoto.classList.add('popup_opened');
+
+	});
+
+	return elementTemplate;
+
+}
+
+function renderCard(card){
+
+	container.prepend(card);
+
+}
+
+function openPopup(popupId){
+
+	popupId.classList.toggle('popup_opened');
+
+}
+
+function closePopup(popupId){
+
+	popupId.classList.remove('popup_opened');
 
 }
 
 function openPopupEditProfile(){
 
-	popupProfile.classList.toggle('popup-profile_opened');
+	openPopup(popupProfile);
 
 	formProfileName.value = profileName.textContent;
 	formProfileCareer.value = profileCareer.textContent;
@@ -112,19 +127,13 @@ function openPopupEditProfile(){
 
 function openPopupAddProfilePhoto(){
 
-	popupAddPhoto.classList.toggle('popup-add-photo_opened');
+	openPopup(popupAddPhoto)
 
 	formPhotoName.placeholder = "Название";
 	formPhotoLink.placeholder = "Ссылка на картинку";
 
 }
 
-function closePopup(){
-
-	popupProfile.classList.remove('popup-profile_opened');
-	popupAddPhoto.classList.remove('popup-add-photo_opened');
-
-}
 
 function submitProfileForm(evt){
 	evt.preventDefault();
@@ -132,24 +141,23 @@ function submitProfileForm(evt){
 	profileName.textContent = formProfileName.value;
 	profileCareer.textContent = formProfileCareer.value;
 
-	closePopup();
+	closePopup(popupProfile);
 }
 
-function submitPhotoElement(evt){
+function submitAddPhotoForm(evt){
 	evt.preventDefault();
 
-	initialCards.unshift({name: formPhotoName.value, link: formPhotoLink.value});
-	createElements(initialCards);
+	const data = ({name: formPhotoName.value, link: formPhotoLink.value});
+	renderCard(createCard(data));
 
-	closePopup();
+	closePopup(popupAddPhoto);
 }
 
 profileEditButton.addEventListener('click',  openPopupEditProfile);
 profileAddButton.addEventListener('click',  openPopupAddProfilePhoto);
 
-popupProfileCloseButton.addEventListener('click', closePopup);
-
-popupAddPhotoCloseButton.addEventListener('click', closePopup);
+popupProfileCloseButton.addEventListener('click', function() {closePopup(popupProfile)} );
+popupAddPhotoCloseButton.addEventListener('click', function() {closePopup(popupAddPhoto)} );
 
 formProfile.addEventListener('submit', submitProfileForm);
-formPhoto.addEventListener('submit', submitPhotoElement);
+formPhoto.addEventListener('submit', submitAddPhotoForm);
