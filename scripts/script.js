@@ -10,13 +10,13 @@ const formPhoto = document.querySelector('.form-photo');
 const formPhotoName = document.querySelector('.form-photo__decription-input_type_name');
 const formPhotoLink = document.querySelector('.form-photo__decription-input_type_link');
 
-const popupProfile = document.querySelector('.popup_profile');
+const popupProfile = document.querySelector('.popup-profile');
 const popupProfileCloseButton = document.querySelector('.popup-profile__close-button');
 
-const popupAddPhoto = document.querySelector('.popup_add-photo');
+const popupAddPhoto = document.querySelector('.popup-add-photo');
 const popupAddPhotoCloseButton = document.querySelector('.popup-add-photo__close-button');
 
-const popupPhoto = document.querySelector('.popup_photo');
+const popupPhoto = document.querySelector('.popup-photo');
 const popupPhotoCloseButton = document.querySelector('.popup-photo__close-button');
 
 const profileEditButton = document.querySelector('.profile__edit-button');
