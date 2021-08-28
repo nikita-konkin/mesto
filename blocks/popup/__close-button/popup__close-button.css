@@ -1,4 +1,4 @@
-.popup-add-photo__close-button{
+.popup__close-button{
 	position: absolute;
 	top: -40px;
 	right: -40px;
@@ -8,17 +8,16 @@
 	background-color: transparent;
 	border: 0;
 	padding: 0;
-	/*float: right;*/
 
 }
 
-.popup-add-photo__close-button:hover{
+.popup__close-button:hover{
 	opacity: 60%;
 	cursor: pointer;
 }
 
 @media screen and (max-width: 525px){
-	.popup-add-photo__close-button{
+	.popup__close-button{
 		background-image: url('../../../images/close_button_mobile.svg');
 		top: -35px;
     	right: 0px;

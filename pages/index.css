@@ -7,29 +7,17 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
-@import url(../blocks/form-profile/__header/form-profile__header.css);
-@import url(../blocks/form-profile/__decription-input/form-profile__decription-input.css);
-@import url(../blocks/form-profile/__submit/form-profile__submit.css);
-
-@import url(../blocks/form-photo/__header/form-photo__header.css);
-@import url(../blocks/form-photo/__decription-input/form-photo__decription-input.css);
-@import url(../blocks/form-photo/__submit/form-photo__submit.css);
-
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__close-button/popup__close-button.css);
+@import url(../blocks/popup/__container/popup__container.css);
 
-/*@import url(../blocks/popup-profile/popup-profile.css);*/
-/*@import url(../blocks/popup-profile/_opened/popup-profile_opened.css);*/
-@import url(../blocks/popup-profile/__close-button/popup-profile__close-button.css);
-@import url(../blocks/popup-profile/__container/popup-profile__container.css);
+@import url(../blocks/form/__submit/form__submit.css);
+@import url(../blocks/form/__header/form__header.css);
+@import url(../blocks/form/__decription-input/form__decription-input.css);
+@import url(../blocks/form/__decription-input/_type/_photo-link/form__decription-input_type_photo-link.css);
+@import url(../blocks/form/__decription-input/_type/_photo-name/form__decription-input_type_photo-name.css);
 
-/*@import url(../blocks/popup-add-photo/popup-add-photo.css);*/
-/*@import url(../blocks/popup-add-photo/_opened/popup-add-photo_opened.css);*/
-@import url(../blocks/popup-add-photo/__close-button/popup-add-photo__close-button.css);
-@import url(../blocks/popup-add-photo/__container/popup-add-photo__container.css);
-
-/*@import url(../blocks/popup-photo/popup-photo.css);*/
-/*@import url(../blocks/popup-photo/_opened/popup-photo_opened.css);*/
 @import url(../blocks/popup-photo/__close-button/popup-photo__close-button.css);
 @import url(../blocks/popup-photo/__container/popup-photo__container.css);
 @import url(../blocks/popup-photo/__photo-descriprion/popup-photo__photo-descriprion.css);

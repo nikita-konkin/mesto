@@ -2,19 +2,19 @@
 const profileName = document.querySelector('.profile__name');
 const profileCareer = document.querySelector('.profile__career');
 
-const formProfile = document.querySelector('.form-profile');
-const formProfileName = document.querySelector('.form-profile__decription-input_type_name');
-const formProfileCareer = document.querySelector('.form-profile__decription-input_type_career');
+const formProfile = document.querySelector('.form_type_profile');
+const formProfileName = document.querySelector('.form__decription-input_type_profile-name');
+const formProfileCareer = document.querySelector('.form__decription-input_type_profile-career');
 
-const formPhoto = document.querySelector('.form-photo');
-const formPhotoName = document.querySelector('.form-photo__decription-input_type_name');
-const formPhotoLink = document.querySelector('.form-photo__decription-input_type_link');
+const formPhoto = document.querySelector('.form_type_add-photo');
+const formPhotoName = document.querySelector('.form__decription-input_type_photo-name');
+const formPhotoLink = document.querySelector('.form__decription-input_type_photo-link');
 
-const popupProfile = document.querySelector('.popup-profile');
-const popupProfileCloseButton = document.querySelector('.popup-profile__close-button');
+const popupProfile = document.querySelector('.popup_type_profile');
+const popupProfileCloseButton = document.querySelector('.popup__close-button_type_profile');
 
-const popupAddPhoto = document.querySelector('.popup-add-photo');
-const popupAddPhotoCloseButton = document.querySelector('.popup-add-photo__close-button');
+const popupAddPhoto = document.querySelector('.popup_type_add-photo');
+const popupAddPhotoCloseButton = document.querySelector('.popup__close-button_type_add-photo');
 
 const popupPhoto = document.querySelector('.popup-photo');
 const popupPhotoCloseButton = document.querySelector('.popup-photo__close-button');
@@ -106,7 +106,7 @@ function renderCard(card){
 
 function openPopup(popupId){
 
-	popupId.classList.toggle('popup_opened');
+	popupId.classList.add('popup_opened');
 
 }
 
@@ -128,9 +128,6 @@ function openPopupEditProfile(){
 function openPopupAddProfilePhoto(){
 
 	openPopup(popupAddPhoto)
-
-	formPhotoName.placeholder = "Название";
-	formPhotoLink.placeholder = "Ссылка на картинку";
 
 }
 
