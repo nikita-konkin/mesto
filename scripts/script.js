@@ -28,7 +28,7 @@ container.textContent = '';
 
 
 
-let initialCards = [
+const initialCards = [
 
   {
     name: 'Она',
@@ -79,6 +79,10 @@ function createCard(data){
 
 	});
 
+	popupPhotoCloseButton.addEventListener('click', function(evt){
+			closePopup(popupPhoto);
+	});
+
 	elementTemplate.querySelector('.element__user-photo').addEventListener('click', function(evt){
 
 		const photo = elementTemplate.querySelector('.element__user-photo').src;
@@ -86,11 +90,7 @@ function createCard(data){
 		popupPhoto.querySelector('.popup-photo__img').src = photo;
 		popupPhoto.querySelector('.popup-photo__photo-descriprion').textContent = photoDescription;
 
-		popupPhotoCloseButton.addEventListener('click', function(evt){
-			popupPhoto.classList.remove('popup_opened');
-		});
-
-		popupPhoto.classList.add('popup_opened');
+		openPopup(popupPhoto)
 
 	});
 
@@ -110,9 +110,9 @@ function openPopup(popupId){
 
 }
 
-function closePopup(popupId){
+function closePopup(popup){
 
-	popupId.classList.remove('popup_opened');
+	popup.classList.remove('popup_opened');
 
 }
 
