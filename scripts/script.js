@@ -26,7 +26,8 @@ const template = document.querySelector('#element').content;
 const container = document.querySelector('.elements');
 container.textContent = '';
 
-
+const inputDescription = document.querySelector('.form__decription-input');
+const popup = document.querySelector('.popup');
 
 const initialCards = [
 
@@ -127,7 +128,7 @@ function openPopupEditProfile(){
 
 function openPopupAddProfilePhoto(){
 
-	openPopup(popupAddPhoto)
+	openPopup(popupAddPhoto);
 
 }
 
@@ -150,11 +151,37 @@ function submitAddPhotoForm(evt){
 	closePopup(popupAddPhoto);
 }
 
+function closePopupByOverlay(evt){
+
+	if (Array.from(evt.target.classList).includes("popup_type_profile")){
+		closePopup(popupProfile);
+	} else if(Array.from(evt.target.classList).includes("popup_type_add-photo")){
+		closePopup(popupAddPhoto);
+	}
+
+}
+
+function keyHandler(evt){
+console.log(evt.key)
+ if (evt.key === "Escape") {
+    closePopup(popupProfile);
+    closePopup(popupAddPhoto);
+  }
+
+}
+
+
 profileEditButton.addEventListener('click',  openPopupEditProfile);
 profileAddButton.addEventListener('click',  openPopupAddProfilePhoto);
 
 popupProfileCloseButton.addEventListener('click', function() {closePopup(popupProfile)} );
 popupAddPhotoCloseButton.addEventListener('click', function() {closePopup(popupAddPhoto)} );
 
+window.addEventListener('click', closePopupByOverlay);
+
 formProfile.addEventListener('submit', submitProfileForm);
 formPhoto.addEventListener('submit', submitAddPhotoForm);
+
+window.addEventListener('keydown', keyHandler);
+
+

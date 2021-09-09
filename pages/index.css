@@ -13,10 +13,14 @@
 @import url(../blocks/popup/__container/popup__container.css);
 
 @import url(../blocks/form/__submit/form__submit.css);
+@import url(../blocks/form/__submit/_inactive/form__submit_inactive.css);
 @import url(../blocks/form/__header/form__header.css);
+@import url(../blocks/form/__set/form__set.css);
 @import url(../blocks/form/__decription-input/form__decription-input.css);
 @import url(../blocks/form/__decription-input/_type/_photo-link/form__decription-input_type_photo-link.css);
 @import url(../blocks/form/__decription-input/_type/_photo-name/form__decription-input_type_photo-name.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input-error/_active/form__input-error_active.css);
 
 @import url(../blocks/popup-photo/__close-button/popup-photo__close-button.css);
 @import url(../blocks/popup-photo/__container/popup-photo__container.css);
@@ -39,6 +43,10 @@
 @import url(../blocks/element/__user-photo-text/element__user-photo-text.css);
 @import url(../blocks/element/__like/element__like.css);
 @import url(../blocks/element/__like/_liked/element__like_liked.css);
+
+@import url(../blocks/name-input-error/name-input-error.css);
+@import url(../blocks/career-input-error/career-input-error.css);
+@import url(../blocks/url-input-error/url-input-error.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);

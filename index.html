@@ -20,11 +20,17 @@
     <div class="popup popup_type_profile">
       <div class="popup__container">
         <button type="button" class="popup__close-button popup__close-button_type_profile"></button>
-          <form name="profile-edit-form" class="form form_type_profile">
-            <h2 class="form__header">Редактировать профиль</h2>
-            <input type="text" name="name"  class="form__decription-input form__decription-input_type_profile-name">
-            <input type="text" name="career"  class="form__decription-input form__decription-input_type_profile-career">
-            <button type="submit" class="form__submit">Сохранить</button>
+          <form name="profile-edit-form" class="form form_type_profile" novalidate>
+            <fieldset class="form__set">
+
+              <h2 class="form__header">Редактировать профиль</h2>
+              <input type="text" id='name-input' name="name"  class="form__decription-input form__decription-input_type_profile-name" minlength="2" maxlength="40" required>
+              <span class="form__input-error name-input-error"></span>
+              <input type="text" id='career-input' name="career"  class="form__decription-input form__decription-input_type_profile-career" minlength="2" maxlength="200" required>
+              <span class="form__input-error career-input-error"></span>
+              <button type="submit" class="form__submit">Сохранить</button>
+
+            </fieldset>
           </form>
       </div>
     </div>
@@ -32,11 +38,17 @@
     <div class="popup popup_type_add-photo">
       <div class="popup__container">
         <button type="button" class="popup__close-button popup__close-button_type_add-photo"></button>
-          <form name="photo-edit-form" class="form form_type_add-photo">
-            <h2 class="form__header">Новое место</h2>
-            <input type="text" name="name"  class="form__decription-input form__decription-input_type_photo-name" placeholder="Название">
-            <input type="text" name="link"  class="form__decription-input form__decription-input_type_photo-link" placeholder="Ссылка на картинку">
-            <button type="submit" class="form__submit">Сохранить</button>
+          <form name="photo-edit-form" class="form form_type_add-photo" novalidate>
+            <fieldset class="form__set">
+
+              <h2 class="form__header">Новое место</h2>
+              <input type="text" name="name" id='name-input' class="form__decription-input form__decription-input_type_photo-name" placeholder="Название" minlength="2" maxlength="30" required>
+              <span class="form__input-error name-input-error"></span>
+              <input type="url" name="link" id='url-input' class="form__decription-input form__decription-input_type_photo-link" placeholder="Ссылка на картинку" required>
+              <span class="form__input-error url-input-error"></span>
+              <button type="submit" class="form__submit">Сохранить</button>
+
+          </fieldset>
           </form>
       </div>
     </div>
@@ -93,6 +105,7 @@
   </div>
 
 <script src="scripts/script.js"></script>
+<script src="scripts/validate.js"></script>
 </body>
 
 </html>
