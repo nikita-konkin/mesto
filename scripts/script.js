@@ -162,6 +162,8 @@ function closePopupByOverlay(evt){
 		closePopup(popupProfile);
 	} else if(Array.from(evt.target.classList).includes("popup_type_add-photo")){
 		closePopup(popupAddPhoto);
+	} else if (Array.from(evt.target.classList).includes("popup-photo")){
+		closePopup(popupPhoto);
 	}
 
 }
@@ -171,6 +173,7 @@ console.log(evt.key)
  if (evt.key === "Escape") {
     closePopup(popupProfile);
     closePopup(popupAddPhoto);
+    closePopup(popupPhoto);
   }
 
 }
