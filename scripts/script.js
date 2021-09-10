@@ -26,8 +26,6 @@ const template = document.querySelector('#element').content;
 const container = document.querySelector('.elements');
 container.textContent = '';
 
-const inputDescription = document.querySelector('.form__decription-input');
-const popup = document.querySelector('.popup');
 
 const initialCards = [
 
@@ -109,11 +107,18 @@ function openPopup(popupId){
 
 	popupId.classList.add('popup_opened');
 
+	window.addEventListener('keydown', keyHandler);
+	window.addEventListener('click', closePopupByOverlay);
+
 }
 
 function closePopup(popup){
 
 	popup.classList.remove('popup_opened');
+
+	window.removeEventListener('keydown', keyHandler);
+	window.removeEventListener('click', closePopupByOverlay);
+
 
 }
 
@@ -177,11 +182,5 @@ profileAddButton.addEventListener('click',  openPopupAddProfilePhoto);
 popupProfileCloseButton.addEventListener('click', function() {closePopup(popupProfile)} );
 popupAddPhotoCloseButton.addEventListener('click', function() {closePopup(popupAddPhoto)} );
 
-window.addEventListener('click', closePopupByOverlay);
-
 formProfile.addEventListener('submit', submitProfileForm);
 formPhoto.addEventListener('submit', submitAddPhotoForm);
-
-window.addEventListener('keydown', keyHandler);
-
-

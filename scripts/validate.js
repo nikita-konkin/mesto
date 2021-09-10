@@ -52,7 +52,6 @@ const setEventListeners = (formElement) => {
       toggleButtonState(inputList, buttonElement);
       checkInputValidity(formElement, inputElement);
       
-
     });
   });
   const profileEditButton = document.querySelector('.profile__edit-button');
