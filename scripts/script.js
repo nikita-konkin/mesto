@@ -19,6 +19,8 @@ const popupAddPhotoCloseButton = document.querySelector('.popup__close-button_ty
 const popupPhoto = document.querySelector('.popup-photo');
 const popupPhotoCloseButton = document.querySelector('.popup-photo__close-button');
 
+const popup = document.querySelector('.photo');
+
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 
@@ -27,71 +29,31 @@ const container = document.querySelector('.elements');
 container.textContent = '';
 
 
-const initialCards = [
-
-  {
-    name: 'Она',
-    link: 'https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iQd9BBvgU_DU/v1/1000x-1.jpg'
-  },
-  {
-    name: 'Пандора',
-    link: 'https://www.vfxvoice.com/wp-content/uploads/2018/06/PIX-3-Avatar-Flight-of-Passage-Scene-E.jpg'
-  },
-  {
-    name: 'Гиагнтысие медузы',
-    link: 'https://thumb.spokesman.com/byon-p8oC8HNoj80DvpTNR8ztKc=/2500x1875/smart/media.spokesman.com/photos/2017/05/13/TRAVEL_UST-DISNEY-PANDORA_9_LA_LvY02dP.jpg'
-  },
-  {
-    name: 'Левитирующие горы',
-    link: 'https://images4.alphacoders.com/758/thumb-1920-75844.jpg'
-  },
-  {
-    name: 'Медузка',
-    link: 'http://www.designbordeaux.com/upload/snimki/cool-wallpaper-avatar-movie-hd-3d-012.jpg'
-  },
-  {
-    name: 'Я и медузки',
-    link: 'https://cutewallpaper.org/21/avatar-hd]/Avatar-HD-Wallpapers-7wallpapers.net.jpg'
-  }
-
-];
-
 initialCards.forEach((data) => renderCard(createCard(data)));
 
 function createCard(data){
 
 	const elementTemplate = template.querySelector('.element').cloneNode(true);
-	
+	const elementRemove = elementTemplate.querySelector('.element__trash-button').closest("article");
+
 	elementTemplate.querySelector('.element__user-photo').src = data.link;
+	elementTemplate.querySelector('.element__user-photo').alt = data.name;
 	elementTemplate.querySelector('.element__user-photo-text').textContent = data.name;
 
-	elementTemplate.querySelector('.element__like').addEventListener('click', function(evt){
-
+	function toggleLike(evt){
 		elementTemplate.querySelector('.element__like').classList.toggle('element__like_liked');
+	}
 
-	});
+	elementTemplate.querySelector('.element__like').addEventListener('click', toggleLike);
+	elementTemplate.querySelector('.element__trash-button').addEventListener('click', (evt) => {elementRemove.remove()});
 
-	elementTemplate.querySelector('.element__trash-button').addEventListener('click', function(evt){
-
-		let elementRemove = elementTemplate.querySelector('.element__trash-button').closest("article");
-		elementRemove.remove();
-
-	});
-
-	popupPhotoCloseButton.addEventListener('click', function(evt){
-			closePopup(popupPhoto);
-	});
-
-	elementTemplate.querySelector('.element__user-photo').addEventListener('click', function(evt){
-
-		const photo = elementTemplate.querySelector('.element__user-photo').src;
-		const photoDescription = elementTemplate.querySelector('.element__user-photo-text').textContent;
-		popupPhoto.querySelector('.popup-photo__img').src = photo;
-		popupPhoto.querySelector('.popup-photo__photo-descriprion').textContent = photoDescription;
-
+	function photoToPopup(evt){
+		popupPhoto.querySelector('.popup-photo__img').src = data.link;
+		popupPhoto.querySelector('.popup-photo__photo-descriprion').textContent = data.name;
 		openPopup(popupPhoto)
+	}
 
-	});
+	elementTemplate.querySelector('.element__user-photo').addEventListener('click', photoToPopup);
 
 	return elementTemplate;
 
@@ -107,8 +69,14 @@ function openPopup(popupId){
 
 	popupId.classList.add('popup_opened');
 
-	window.addEventListener('keydown', keyHandler);
-	window.addEventListener('click', closePopupByOverlay);
+	function keyHandler(){
+		if (event.key === "Escape") {
+	    closePopup(popupId);
+	  }
+	}
+
+	window.addEventListener('keydown', () => {keyHandler(popupId)});
+	window.addEventListener('click',  function(popupId) {closePopupByOverlay(popupId)});
 
 }
 
@@ -116,9 +84,8 @@ function closePopup(popup){
 
 	popup.classList.remove('popup_opened');
 
-	window.removeEventListener('keydown', keyHandler);
 	window.removeEventListener('click', closePopupByOverlay);
-
+	window.removeEventListener('click', openPopup.keyHandler);
 
 }
 
@@ -153,28 +120,18 @@ function submitAddPhotoForm(evt){
 	const data = ({name: formPhotoName.value, link: formPhotoLink.value});
 	renderCard(createCard(data));
 
+	formPhotoName.value = '';
+	formPhotoLink.value = '';
+
 	closePopup(popupAddPhoto);
 }
 
-function closePopupByOverlay(evt){
+function closePopupByOverlay(popupId){
 
-	if (Array.from(evt.target.classList).includes("popup_type_profile")){
-		closePopup(popupProfile);
-	} else if(Array.from(evt.target.classList).includes("popup_type_add-photo")){
-		closePopup(popupAddPhoto);
-	} else if (Array.from(evt.target.classList).includes("popup-photo")){
-		closePopup(popupPhoto);
+	if (Array.from(event.target.classList).includes("popup")){
+
+		closePopup(popupId.target);
 	}
-
-}
-
-function keyHandler(evt){
-console.log(evt.key)
- if (evt.key === "Escape") {
-    closePopup(popupProfile);
-    closePopup(popupAddPhoto);
-    closePopup(popupPhoto);
-  }
 
 }
 
@@ -187,3 +144,5 @@ popupAddPhotoCloseButton.addEventListener('click', function() {closePopup(popupA
 
 formProfile.addEventListener('submit', submitProfileForm);
 formPhoto.addEventListener('submit', submitAddPhotoForm);
+
+popupPhotoCloseButton.addEventListener('click', evt => {closePopup(popupPhoto)});
