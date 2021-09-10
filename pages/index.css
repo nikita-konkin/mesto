@@ -45,6 +45,7 @@
 @import url(../blocks/element/__like/_liked/element__like_liked.css);
 
 @import url(../blocks/name-input-error/name-input-error.css);
+@import url(../blocks/photo-name-input-error/photo-name-input-error.css);
 @import url(../blocks/career-input-error/career-input-error.css);
 @import url(../blocks/url-input-error/url-input-error.css);
 
