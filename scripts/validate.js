@@ -1,15 +1,15 @@
 const showInputError = (formElement, inputElement, errorMessage) => {
   // console.log(inputElement.id)
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(validationClasses.inputErrorClass.substring(1));
+  inputElement.classList.add(validationClasses.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(validationClasses.errorClass.substring(1));
+  errorElement.classList.add(validationClasses.errorClass);
 };
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(validationClasses.inputErrorClass.substring(1));
-  errorElement.classList.remove(validationClasses.errorClass.substring(1));
+  inputElement.classList.remove(validationClasses.inputErrorClass);
+  errorElement.classList.remove(validationClasses.errorClass);
   errorElement.textContent = '';
 };
 
@@ -25,12 +25,12 @@ const checkInputValidity = (formElement, inputElement) => {
 function toggleButtonState(inputList, buttonElement){
   if (hasInvalidInput(inputList)) {
 
-    buttonElement.classList.add(validationClasses.inactiveButtonClass.substring(1));
+    buttonElement.classList.add(validationClasses.inactiveButtonClass);
     buttonElement.classList.add('disabled');
 
   } else {
 
-    buttonElement.classList.remove(validationClasses.inactiveButtonClass.substring(1));
+    buttonElement.classList.remove(validationClasses.inactiveButtonClass);
     buttonElement.classList.remove('disabled');
 
   }
@@ -60,7 +60,7 @@ const setEventListeners = (formElement) => {
   profileEditButton.addEventListener('click',() => {toggleButtonState(inputList, buttonElement)})
 };
 
-const enableValidation = () => {
+const enableValidation = (validationClasses) => {
 
   const formList = Array.from(document.querySelectorAll(validationClasses.formSelector));
 
@@ -77,5 +77,5 @@ const enableValidation = () => {
   });
 };
 
-enableValidation();
+enableValidation(validationClasses);
 
