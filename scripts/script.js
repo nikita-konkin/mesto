@@ -2,6 +2,8 @@
 const profileName = document.querySelector('.profile__name');
 const profileCareer = document.querySelector('.profile__career');
 
+const formSubmitButton = document.querySelector('.form__submit');
+
 const formProfile = document.querySelector('.form_type_profile');
 const formProfileName = document.querySelector('.form__decription-input_type_profile-name');
 const formProfileCareer = document.querySelector('.form__decription-input_type_profile-career');
@@ -103,6 +105,9 @@ function openPopupAddProfilePhoto(){
 
 	openPopup(popupAddPhoto);
 
+	formSubmitButton.classList.add('disabled');
+	formSubmitButton.classList.add('form__submit_inactive');
+
 }
 
 function submitProfileForm(evt){
@@ -118,12 +123,17 @@ function submitAddPhotoForm(evt){
 	evt.preventDefault();
 
 	const data = ({name: formPhotoName.value, link: formPhotoLink.value});
+
 	renderCard(createCard(data));
 
 	formPhotoName.value = '';
 	formPhotoLink.value = '';
 
 	closePopup(popupAddPhoto);
+
+	evt.target.querySelector('.form__submit').classList.add('form__submit_inactive');
+	evt.target.querySelector('.form__submit').classList.add('disabled');
+
 }
 
 function closePopupByOverlay(evt){
