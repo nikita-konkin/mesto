@@ -1,3 +1,5 @@
+import {Card} from './Card.js';
+import {initialCards} from './cards.js';
 
 const profileName = document.querySelector('.profile__name');
 const profileCareer = document.querySelector('.profile__career');
@@ -31,46 +33,20 @@ const container = document.querySelector('.elements');
 container.textContent = '';
 
 
-initialCards.forEach((data) => renderCard(createCard(data)));
+initialCards.forEach((data) => renderCard(data));
 
-function createCard(data){
-
-	const elementTemplate = template.querySelector('.element').cloneNode(true);
-	const elementRemove = elementTemplate.querySelector('.element__trash-button').closest("article");
-
-	elementTemplate.querySelector('.element__user-photo').src = data.link;
-	elementTemplate.querySelector('.element__user-photo').alt = data.name;
-	elementTemplate.querySelector('.element__user-photo-text').textContent = data.name;
-
-	function toggleLike(evt){
-		elementTemplate.querySelector('.element__like').classList.toggle('element__like_liked');
-	}
-
-	elementTemplate.querySelector('.element__like').addEventListener('click', toggleLike);
-	elementTemplate.querySelector('.element__trash-button').addEventListener('click', (evt) => {elementRemove.remove()});
-
-	function photoToPopup(evt){
-		popupPhoto.querySelector('.popup-photo__img').src = data.link;
-		popupPhoto.querySelector('.popup-photo__photo-descriprion').textContent = data.name;
-		openPopup(popupPhoto)
-	}
-
-	elementTemplate.querySelector('.element__user-photo').addEventListener('click', photoToPopup);
-
-	return elementTemplate;
-
-}
-
-function renderCard(card){
-
-	container.prepend(card);
+function renderCard(data){
+	
+	const card = new Card(data, template);
+	// console.log(card.cardCreate())
+	container.prepend(card.cardCreate());
 
 }
 
 function keyHandler(evt){
 	const popupOpened = document.querySelector('.popup_opened');
 	if (evt.key === "Escape") {
-    closePopup(popupOpened);
+    	closePopup(popupOpened);
   }
 }
 
@@ -88,7 +64,7 @@ function closePopup(popup){
 	popup.classList.remove('popup_opened');
 
 	window.removeEventListener('click', closePopupByOverlay);
-	window.removeEventListener('click', keyHandler);
+	window.removeEventListener('keydown', keyHandler);
 
 }
 
