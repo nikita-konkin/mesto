@@ -2,6 +2,7 @@
 // const popupPhotoCloseButton = document.querySelector('.popup-photo__close-button');
 let keyHandler;
 let closePopupByOverlay;
+
 class Card{
 	constructor(data, template){
 		this._data = data;

@@ -9,3 +9,5 @@ const validationClasses = {
   formSet: '.form__set'
   
 }
+
+export {validationClasses}
