@@ -22,7 +22,7 @@ const popupProfileCloseButton = document.querySelector('.popup__close-button_typ
 const popupAddPhoto = document.querySelector('.popup_type_add-photo');
 const popupAddPhotoCloseButton = document.querySelector('.popup__close-button_type_add-photo');
 
-// const popupPhoto = document.querySelector('.popup-photo');
+const popupPhoto = document.querySelector('.popup-photo');
 const popupPhotoCloseButton = document.querySelector('.popup-photo__close-button');
 
 const popup = document.querySelector('.photo');
@@ -45,18 +45,21 @@ function renderCard(data){
 
 }
 
-
 formList.forEach((formElement) => {
-	// console.log(formElement)
+
 	const formValidation = new FormValidator(validationClasses, formElement);
 	formValidation.enableValidation();
+	profileEditButton.addEventListener('click', () => {formValidation.toggleButtonState()});
+
 });
 
 function keyHandler(evt){
+
 	const popupOpened = document.querySelector('.popup_opened');
 	if (evt.key === "Escape") {
     	closePopup(popupOpened);
   }
+
 }
 
 function openPopup(popupId){
@@ -77,6 +80,25 @@ function closePopup(popup){
 
 }
 
+function closePopupByOverlay(evt){
+
+	if (Array.from(evt.target.classList).includes("popup")){
+
+		closePopup(evt.target);
+
+	}
+
+}
+
+export function handlePreviewPicture(name, link) {
+
+    popupPhoto.querySelector('.popup-photo__photo-descriprion').textContent = name;
+    popupPhoto.querySelector('.popup-photo__img').src = link;
+    popupPhoto.querySelector('.popup-photo__img').alt = name;
+    openPopup(popupPhoto)
+
+}
+
 function openPopupEditProfile(){
 
 	openPopup(popupProfile);
@@ -89,9 +111,6 @@ function openPopupEditProfile(){
 function openPopupAddProfilePhoto(){
 
 	openPopup(popupAddPhoto);
-
-	formSubmitButton.classList.add('disabled');
-	formSubmitButton.classList.add('form__submit_inactive');
 
 }
 
@@ -116,22 +135,7 @@ function submitAddPhotoForm(evt){
 
 	closePopup(popupAddPhoto);
 
-	evt.target.querySelector('.form__submit').classList.add('form__submit_inactive');
-	evt.target.querySelector('.form__submit').classList.add('disabled');
-
 }
-
-function closePopupByOverlay(evt){
-
-	if (Array.from(evt.target.classList).includes("popup")){
-
-		closePopup(evt.target);
-
-	}
-
-}
-
-
 
 
 profileEditButton.addEventListener('click',  openPopupEditProfile);
@@ -143,4 +147,5 @@ popupAddPhotoCloseButton.addEventListener('click', function() {closePopup(popupA
 formProfile.addEventListener('submit', submitProfileForm);
 formPhoto.addEventListener('submit', submitAddPhotoForm);
 
-// popupPhotoCloseButton.addEventListener('click', evt => {closePopup(popupPhoto)});
+popupPhotoCloseButton.addEventListener('click', evt => {closePopup(popupPhoto)});
+
