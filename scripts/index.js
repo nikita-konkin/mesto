@@ -1,6 +1,6 @@
-import {Card} from './Card.js';
+import {Card} from './card.js';
 import {initialCards} from './cards.js';
-import {FormValidator} from './FormValidator.js'
+import {FormValidator} from './formValidator.js'
 import {validationClasses} from './validationSettings.js'
 
 const profileName = document.querySelector('.profile__name');
@@ -12,9 +12,9 @@ const formProfile = document.querySelector('.form_type_profile');
 const formProfileName = document.querySelector('.form__decription-input_type_profile-name');
 const formProfileCareer = document.querySelector('.form__decription-input_type_profile-career');
 
-// const formPhoto = document.querySelector('.form_type_add-photo');
-// const formPhotoName = document.querySelector('.form__decription-input_type_photo-name');
-// const formPhotoLink = document.querySelector('.form__decription-input_type_photo-link');
+const formPhoto = document.querySelector('.form_type_add-photo');
+const formPhotoName = document.querySelector('.form__decription-input_type_photo-name');
+const formPhotoLink = document.querySelector('.form__decription-input_type_photo-link');
 
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupProfileCloseButton = document.querySelector('.popup__close-button_type_profile');
@@ -39,7 +39,7 @@ const formList = Array.from(document.querySelectorAll(validationClasses.formSele
 initialCards.forEach((data) => renderCard(data));
 
 function renderCard(data){
-	
+
 	const card = new Card(data, template);
 	container.prepend(card.cardCreate());
 
