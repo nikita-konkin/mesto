@@ -34,6 +34,9 @@ const template = document.querySelector('#element').content;
 const container = document.querySelector('.elements');
 container.textContent = '';
 
+const popupPhotoImageElement = popupPhoto.querySelector('.popup-photo__img');
+const popupPhotoTitleElement = popupPhoto.querySelector('.popup-photo__photo-descriprion');
+
 const formList = Array.from(document.querySelectorAll(validationClasses.formSelector));
 
 initialCards.forEach((data) => renderCard(data));
@@ -50,13 +53,15 @@ formList.forEach((formElement) => {
 	const formValidation = new FormValidator(validationClasses, formElement);
 	formValidation.enableValidation();
 	profileEditButton.addEventListener('click', () => {formValidation.toggleButtonState()});
+	formPhoto.addEventListener('submit', () => {formValidation.toggleButtonStateOnSubmit()});
 
 });
 
 function keyHandler(evt){
 
-	const popupOpened = document.querySelector('.popup_opened');
+	
 	if (evt.key === "Escape") {
+		const popupOpened = document.querySelector('.popup_opened');
     	closePopup(popupOpened);
   }
 
@@ -92,9 +97,9 @@ function closePopupByOverlay(evt){
 
 export function handlePreviewPicture(name, link) {
 
-    popupPhoto.querySelector('.popup-photo__photo-descriprion').textContent = name;
-    popupPhoto.querySelector('.popup-photo__img').src = link;
-    popupPhoto.querySelector('.popup-photo__img').alt = name;
+    popupPhotoTitleElement.textContent = name;
+    popupPhotoImageElement.src = link;
+    popupPhotoImageElement.alt = name;
     openPopup(popupPhoto)
 
 }
