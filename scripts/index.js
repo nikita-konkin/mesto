@@ -41,21 +41,18 @@ const formList = Array.from(document.querySelectorAll(validationClasses.formSele
 
 initialCards.forEach((data) => renderCard(data));
 
+const editProfileValidator = new FormValidator(validationClasses, formProfile);
+editProfileValidator.enableValidation();
+const addCardValidator = new FormValidator(validationClasses, formPhoto);
+addCardValidator.enableValidation();
+
+
 function renderCard(data){
 
 	const card = new Card(data, template);
 	container.prepend(card.cardCreate());
 
 }
-
-formList.forEach((formElement) => {
-
-	const formValidation = new FormValidator(validationClasses, formElement);
-	formValidation.enableValidation();
-	profileEditButton.addEventListener('click', () => {formValidation.toggleButtonState()});
-	formPhoto.addEventListener('submit', () => {formValidation.toggleButtonStateOnSubmit()});
-
-});
 
 function keyHandler(evt){
 
@@ -69,6 +66,7 @@ function keyHandler(evt){
 
 function openPopup(popupId){
 
+	editProfileValidator.toggleButtonState();
 	popupId.classList.add('popup_opened');
 
 	window.addEventListener('keydown', keyHandler);
@@ -106,6 +104,7 @@ export function handlePreviewPicture(name, link) {
 
 function openPopupEditProfile(){
 
+
 	openPopup(popupProfile);
 
 	formProfileName.value = profileName.textContent;
@@ -137,6 +136,8 @@ function submitAddPhotoForm(evt){
 
 	formPhotoName.value = '';
 	formPhotoLink.value = '';
+
+	addCardValidator.disableSubmitButton();
 
 	closePopup(popupAddPhoto);
 
