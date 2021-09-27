@@ -66,7 +66,7 @@ function keyHandler(evt){
 
 function openPopup(popupId){
 
-	editProfileValidator.toggleButtonState();
+	
 	popupId.classList.add('popup_opened');
 
 	window.addEventListener('keydown', keyHandler);
@@ -104,7 +104,7 @@ export function handlePreviewPicture(name, link) {
 
 function openPopupEditProfile(){
 
-
+	editProfileValidator.toggleButtonState();
 	openPopup(popupProfile);
 
 	formProfileName.value = profileName.textContent;
