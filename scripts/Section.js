@@ -11,6 +11,7 @@ export class Section{
 	}
 
 	addItem(element){
+		console.log(element)
 		this._containerSelector.prepend(element);
 	}
 
@@ -21,6 +22,11 @@ export class Section{
 			this._renderer(item);
 		});
 
+	}
+
+	rendererAdditionalCard(data){
+
+		this._renderer(data);
 	}
 
 }

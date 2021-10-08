@@ -4,6 +4,8 @@ import {FormValidator} from './formValidator.js'
 import {validationClasses} from './validationSettings.js'
 import {Section} from './Section.js'
 import {Popup} from './Popup.js'
+import {PopupWithImage} from './PopupWithImage.js'
+import {PopupWithForm} from './PopupWithForm.js'
 
 const profileName = document.querySelector('.profile__name');
 const profileCareer = document.querySelector('.profile__career');
@@ -15,6 +17,7 @@ const formProfileName = document.querySelector('.form__decription-input_type_pro
 const formProfileCareer = document.querySelector('.form__decription-input_type_profile-career');
 
 const formPhoto = document.querySelector('.form_type_add-photo');
+// const formPhoto = '.form_type_add-photo';
 const formPhotoName = document.querySelector('.form__decription-input_type_photo-name');
 const formPhotoLink = document.querySelector('.form__decription-input_type_photo-link');
 
@@ -35,8 +38,8 @@ const profileAddButton = document.querySelector('.profile__add-button');
 const template = document.querySelector('#element').content;
 const container = '.elements';
 
-const popupPhotoImageElement = popupPhoto.querySelector('.popup-photo__img');
-const popupPhotoTitleElement = popupPhoto.querySelector('.popup-photo__photo-descriprion');
+const popupPhotoImageElement = '.popup-photo__img';
+const popupPhotoTitleElement = '.popup-photo__photo-descriprion';
 
 const formList = Array.from(document.querySelectorAll(validationClasses.formSelector));
 
@@ -49,7 +52,11 @@ addCardValidator.enableValidation();
 const defaultCardList = new Section({
   data: initialCards,
   renderer: (item) => {
-    const card = new Card(item, template);
+    const card = new Card(item, template, 
+    	(name, link) => {
+    		  const popupWithImage = new PopupWithImage(popupPhoto, name, link, popupPhotoImageElement, popupPhotoTitleElement);
+  				popupWithImage.open();
+    	});
     const cardElement = card.cardCreate();
     defaultCardList.addItem(cardElement);
   }
@@ -98,16 +105,17 @@ defaultCardList.renderer();
 
 // }
 
-export function handlePreviewPicture(name, link) {
+// function handlePreviewPicture(name, link) {
 
-    popupPhotoTitleElement.textContent = name;
-    popupPhotoImageElement.src = link;
-    popupPhotoImageElement.alt = name;
-    // openPopup(popupPhoto)
-    const popup = new Popup(popupPhoto);
-    popup.open()
+//   // popupPhotoTitleElement.textContent = name;
+//   // popupPhotoImageElement.src = link;
+//   // popupPhotoImageElement.alt = name;
+//   // openPopup(popupPhoto)
+//   // const popup = new Popup(popupPhoto);
+//   const popupWithImage = new PopupWithImage(popupPhoto, name, link, popupPhotoImageElement, popupPhotoTitleElement);
+//   popupWithImage.open();
 
-}
+// }
 
 function openPopupEditProfile(){
 
@@ -125,7 +133,7 @@ function openPopupAddProfilePhoto(){
 
 	// openPopup(popupAddPhoto);
 	const popup = new Popup(popupAddPhoto);
-    popup.open()
+  popup.open()
 
 }
 
@@ -137,7 +145,7 @@ function submitProfileForm(evt){
 
 	// closePopup(popupProfile);
 	const popup = new Popup(popupProfile);
-    popup.close()
+  popup.close()
 }
 
 function submitAddPhotoForm(evt){
@@ -145,7 +153,8 @@ function submitAddPhotoForm(evt){
 
 	const data = ({name: formPhotoName.value, link: formPhotoLink.value});
 
-	renderCard(data);
+	// renderCard(data);
+	defaultCardList.rendererAdditionalCard(data);
 
 	formPhotoName.value = '';
 	formPhotoLink.value = '';
@@ -154,7 +163,7 @@ function submitAddPhotoForm(evt){
 
 	// closePopup(popupAddPhoto);
 	const popup = new Popup(popupAddPhoto);
-    popup.close()
+  popup.close()
 
 }
 
@@ -169,8 +178,15 @@ popupCloseProfile.setEventListeners(popupProfileCloseButton)
 const popupCloseAddPhoto = new Popup(popupAddPhoto);
 popupCloseAddPhoto.setEventListeners(popupAddPhotoCloseButton)
 
+const popupFormPhoto = new PopupWithForm(popupAddPhoto,
+	{name: formPhotoName,
+	link: formPhotoLink},
+	(data) => {defaultCardList.rendererAdditionalCard(data)},
+	() => {addCardValidator.disableSubmitButton()})
+popupFormPhoto.setEventListeners();
+
 formProfile.addEventListener('submit', submitProfileForm);
-formPhoto.addEventListener('submit', submitAddPhotoForm);
+// formPhoto.addEventListener('submit', submitAddPhotoForm);
 
 // popupPhotoCloseButton.addEventListener('click', evt => {closePopup(popupPhoto)});
 const popupClosePhoto = new Popup(popupPhoto);

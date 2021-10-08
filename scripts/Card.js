@@ -1,14 +1,15 @@
-import {handlePreviewPicture} from './index.js';
+// import {handlePreviewPicture} from './index.js';
 
 let keyHandler;
 let closePopupByOverlay;
 
 class Card{
 
-	constructor(data, template){
+	constructor(data, template, handlePreviewPicture){
 		
 		this._data = data;
 		this._template = template;
+		this._handleCardClick = handlePreviewPicture;
 	}
 
 	_getTemplate() {
@@ -37,7 +38,7 @@ class Card{
 		this._elementTemplate
 		.querySelector('.element__trash-button').addEventListener('click', () => {this._elementTemplate.remove()});
 		this._elementTemplate.
-		querySelector('.element__user-photo').addEventListener('click', () => {handlePreviewPicture(this._data.name, this._data.link)})
+		querySelector('.element__user-photo').addEventListener('click', () => {this._handleCardClick(this._data.name, this._data.link)})
 
     };
 

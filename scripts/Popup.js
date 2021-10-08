@@ -10,10 +10,21 @@ export class Popup{
 		}
 	}
 
+	_handlePopupOverlayClicklClose(){
+
+		if (Array.from(event.target.classList).includes("popup")){
+
+			this.close(this._popupSelector)
+
+		}
+	}
+
+
 	setEventListeners(closeButton){
 
 		closeButton.addEventListener('click', event => this.close(this._popupSelector))
-		// window.addEventListener('keydown', this._handleEscClose());
+		window.addEventListener('click', event => this._handlePopupOverlayClicklClose());
+
 		
 
 	}
@@ -30,7 +41,7 @@ export class Popup{
 	close(){
 
 		this._popupSelector.classList.remove('popup_opened');
-
+		console.log(this._popupSelector)
 		window.removeEventListener('keydown', () => {this._handleEscClose()});
 		// window.removeEventListener('click', closePopupByOverlay);
 		// window.removeEventListener('keydown', keyHandler);
