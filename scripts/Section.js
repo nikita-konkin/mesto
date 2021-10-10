@@ -7,15 +7,19 @@ export class Section{
 	}
 
 	_clear(){
+
 		this._containerSelector.innerHTML = '';
+
 	}
 
 	addItem(element){
-		console.log(element)
+
 		this._containerSelector.prepend(element);
+
 	}
 
 	renderer(){
+
 		this._clear();
 
 		this._item.forEach(item =>{
@@ -27,6 +31,7 @@ export class Section{
 	rendererAdditionalCard(data){
 
 		this._renderer(data);
+		
 	}
 
 }

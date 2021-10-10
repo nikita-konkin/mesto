@@ -1,12 +1,6 @@
-// import {handlePreviewPicture} from './index.js';
-
-let keyHandler;
-let closePopupByOverlay;
-
-class Card{
+export class Card{
 
 	constructor(data, template, handlePreviewPicture){
-		
 		this._data = data;
 		this._template = template;
 		this._handleCardClick = handlePreviewPicture;
@@ -45,9 +39,7 @@ class Card{
 	_toggleLike(){
 
 		this._elementTemplate.querySelector('.element__like').classList.toggle('element__like_liked');
+
 	}
 
 }
-
-
-export {Card}

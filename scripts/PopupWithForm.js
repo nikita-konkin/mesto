@@ -7,18 +7,20 @@ export class PopupWithForm extends Popup{
 		this._link = link;
 		this._renderer = renderer;
 		this._validator = validator;
-		// console.log(popupSelector)
 	}
 
 	_getInputValues(){
+
 		return this._data = ({name: this._name.value, link: this._link.value})
+
 	}
 
 	setEventListeners(){
+
 		this._popupSelector.addEventListener('submit', ()=>{this._renderer(this._getInputValues())});
 		this._popupSelector.addEventListener('submit', ()=>{this._validator});
 		this._popupSelector.addEventListener('submit', ()=>{this.close()});
-		// formPhoto.addEventListener('submit', submitAddPhotoForm);
+
 	}
 
 	close(){
