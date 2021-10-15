@@ -23,11 +23,6 @@ export class PopupWithImage extends Popup{
 		super.setEventListeners();
 	}
 
-	_handlePopupOverlayClicklClose(){
-		super._handlePopupOverlayClicklClose();
-	}
-
-
 	close(){
 		super.close()
 	}

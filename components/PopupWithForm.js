@@ -5,12 +5,15 @@ export class PopupWithForm extends Popup{
 		super(popupSelector, closeButton);
 		this._renderer = renderer;
 		this._toggleButtonState = toggleButtonState;
+		this._popupForm = document.getElementById("photo-edit-form");
 	}
 
 	_getInputValues(){
 
-		this._inputList = Array.from(this._popupSelector.querySelectorAll('input'));
-		return this._data = ({name: this._inputList[0].value, link: this._inputList[1].value})
+		this._newObject = {}
+		this._popupSelector.querySelectorAll('input').forEach(element => this._newObject[element.name] = element.value);
+
+		return this._newObject
 
 	}
 
@@ -22,10 +25,8 @@ export class PopupWithForm extends Popup{
 	}
 
 	close(){
-		
-		this._getInputValues()
-		this._inputList[0].value = '';
-		this._inputList[1].value = '';
+
+		this._popupForm.reset();
 		this._toggleButtonState();
 		super.close();
 

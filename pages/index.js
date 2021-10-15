@@ -5,15 +5,12 @@ import {initialCards} from '../utils/cards.js';
 import {FormValidator} from '../components/formValidator.js'
 import {validationClasses} from '../utils/validationSettings.js'
 import {Section} from '../components/Section.js'
-import {Popup} from '../components/Popup.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
 import {UserInfo} from '../components/UserInfo.js'
 
 const profileName = document.querySelector('.profile__name');
 const profileCareer = document.querySelector('.profile__career');
-
-// const formSubmitButton = document.querySelector('.form__submit');
 
 const formProfile = document.querySelector('.form_type_profile');
 const formProfileName = document.querySelector('.form__decription-input_type_profile-name');
@@ -69,21 +66,21 @@ userInfo.setUserInfo('Джек Салли', 'Житель Пандоры');
 
 const popupFormAddPhoto = new PopupWithForm(
 	popupAddPhoto,
-	(data) => {defaultCardList.rendererAdditionalCard(data)},
+	(data) => {defaultCardList.rendererAdditionalCard(data);
+						popupFormAddPhoto.close()},
 	popupAddPhotoCloseButton,
 	() => {addCardValidator.toggleButtonState()})
 popupFormAddPhoto.setEventListeners();
 
 const popupFormChangeProfile = new PopupWithForm(
 	popupProfile,
-	(data) => {userInfo.setUserInfo(data.name, data.link)},
+	(data) => {userInfo.setUserInfo(data.name, data.career);
+						popupFormChangeProfile.close()},
 	popupProfileCloseButton,
 	() => {addCardValidator.toggleButtonState()})
 popupFormChangeProfile.setEventListeners();
 
-function openPopupEditProfile(){
-
-	editProfileValidator.toggleButtonState();
+function openPopupAddNewCard(){
 
   popupFormChangeProfile.open();
 
@@ -98,6 +95,6 @@ function openPopupAddProfilePhoto(){
   
 }
 
-profileEditButton.addEventListener('click',  openPopupEditProfile);
+profileEditButton.addEventListener('click',  openPopupAddNewCard);
 profileAddButton.addEventListener('click',  openPopupAddProfilePhoto);
 

@@ -3,18 +3,18 @@ export class Section{
 	constructor({ data, renderer }, containerSelector){
 		this._item = data;
 		this._renderer = renderer;
-		this.Selector = document.querySelector(containerSelector);
+		this._container = document.querySelector(containerSelector);
 	}
 
 	_clear(){
 
-		this.Selector.innerHTML = '';
+		this._container.innerHTML = '';
 
 	}
 
 	addItem(element){
 
-		this.Selector.prepend(element);
+		this._container.prepend(element);
 
 	}
 
