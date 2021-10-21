@@ -1,4 +1,14 @@
 import './index.css';
+import {Card} from '../components/card.js';
+import {initialCards} from '../utils/cards.js';
+import {FormValidator} from '../components/formValidator.js'
+import {validationClasses} from '../utils/validationSettings.js'
+import {Section} from '../components/Section.js'
+import {PopupWithImage} from '../components/PopupWithImage.js'
+import {PopupWithForm} from '../components/PopupWithForm.js'
+import {UserInfo} from '../components/UserInfo.js'
+
+import {container, popupPhotoImageElement, popupPhotoTitleElement} from '../utils/constants.js'
 
 const profileName = document.querySelector('.profile__name');
 const profileCareer = document.querySelector('.profile__career');
@@ -25,16 +35,20 @@ const profileAddButton = document.querySelector('.profile__add-button');
 
 const template = document.querySelector('#element').content;
 
-import {Card} from '../components/card.js';
-import {initialCards} from '../utils/cards.js';
-import {FormValidator} from '../components/formValidator.js'
-import {validationClasses} from '../utils/validationSettings.js'
-import {Section} from '../components/Section.js'
-import {PopupWithImage} from '../components/PopupWithImage.js'
-import {PopupWithForm} from '../components/PopupWithForm.js'
-import {UserInfo} from '../components/UserInfo.js'
+function openPopupEditProfile(){
 
-import {container, popupPhotoImageElement, popupPhotoTitleElement} from '../utils/constants.js'
+  popupFormChangeProfile.open();
+
+	formProfileName.value = userInfo.getUserInfo().name;
+	formProfileCareer.value = userInfo.getUserInfo().career;
+
+}
+
+function openPopupAddNewCard(){
+
+  popupFormAddPhoto.open();
+  
+}
 
 const editProfileValidator = new FormValidator(validationClasses, formProfile);
 editProfileValidator.enableValidation();
@@ -78,20 +92,7 @@ const popupFormChangeProfile = new PopupWithForm(
 	() => {addCardValidator.toggleButtonState()})
 popupFormChangeProfile.setEventListeners();
 
-function openPopupEditProfile(){
 
-  popupFormChangeProfile.open();
-
-	formProfileName.value = userInfo.getUserInfo().name;
-	formProfileCareer.value = userInfo.getUserInfo().career;
-
-}
-
-function openPopupAddNewCard(){
-
-  popupFormAddPhoto.open();
-  
-}
 
 profileEditButton.addEventListener('click', openPopupEditProfile);
 profileAddButton.addEventListener('click', openPopupAddNewCard);

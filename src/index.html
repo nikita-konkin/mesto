@@ -37,18 +37,30 @@
     <div class="popup popup_type_add-photo">
       <div class="popup__container">
         <button type="button" class="popup__close-button popup__close-button_type_add-photo"></button>
-          <form id = "photo-edit-form" name="photo-edit-form" class="form form_type_add-photo" novalidate>
-            <fieldset class="form__set">
+        <form id = "photo-edit-form" name="photo-edit-form" class="form form_type_add-photo" novalidate>
+          <fieldset class="form__set">
 
-              <h2 class="form__header">Новое место</h2>
-              <input type="text" name="name" id='photo-name-input' class="form__decription-input form__decription-input_type_photo-name" placeholder="Название" minlength="2" maxlength="30" required>
-              <span class="form__input-error photo-name-input-error"></span>
-              <input type="url" name="link" id='url-input' class="form__decription-input form__decription-input_type_photo-link" placeholder="Ссылка на картинку" required>
-              <span class="form__input-error url-input-error"></span>
-              <button type="submit" class="form__submit">Сохранить</button>
+            <h2 class="form__header">Новое место</h2>
+            <input type="text" name="name" id='photo-name-input' class="form__decription-input form__decription-input_type_photo-name" placeholder="Название" minlength="2" maxlength="30" required>
+            <span class="form__input-error photo-name-input-error"></span>
+            <input type="url" name="link" id='url-input' class="form__decription-input form__decription-input_type_photo-link" placeholder="Ссылка на картинку" required>
+            <span class="form__input-error url-input-error"></span>
+            <button type="submit" class="form__submit">Сохранить</button>
 
+        </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_type_confirm">
+      <div class="popup__container">
+        <button type="button" class="popup__close-button popup__close-button_type_confirm"></button>
+        <form id="confirm-form" class="form form_type_confirm">
+          <fieldset class="form__set">
+            <h2 class="form__header_confirm">Вы уверены?</h2>
+            <button type="submit" class="form__submit-confirm">Да</button>
           </fieldset>
-          </form>
+        </form>
       </div>
     </div>
 
@@ -66,7 +78,10 @@
           <img class="element__user-photo">
           <div class="element__user-photo-description">
             <h2 class="element__user-photo-text"></h2>
-            <button type="button" class="element__like"></button>
+            <div class="element__like-wrap">
+              <button type="button" class="element__like"></button>
+              <a class="element__click">1</a>
+            </div>
           </div>
         </article> 
     </template>
@@ -75,7 +90,12 @@
     <main class="content">
       
       <section class="profile">
-        <img src="<%=require('./images/avatar_foto.jpg')%>" alt="Фото профиля" class="profile__avatar">
+        <div class="profile__avatar-container">
+          <img src="<%=require('./images/avatar_foto.jpg')%>" alt="Фото профиля" class="profile__avatar">
+          <div class="profile__avatar-edit_cover">
+            <img src="<%=require('./images/avatar_edit.svg')%>" alt="Редактировать фото" class="profile__avatar-edit">
+          </div>
+        </div>
         <div class="profile__description-wrap">
 
           <div class="profile__description">
