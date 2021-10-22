@@ -7,6 +7,7 @@ import {Section} from '../components/Section.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
 import {UserInfo} from '../components/UserInfo.js'
+import {Api} from '../components/Api.js'
 
 import {container, popupPhotoImageElement, popupPhotoTitleElement} from '../utils/constants.js'
 
@@ -34,6 +35,17 @@ const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 
 const template = document.querySelector('#element').content;
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/cards',
+  headers: {
+    authorization: '6dcc8eb5-b36f-4e58-925f-68f8caf1b64a',
+    'Content-Type': 'application/json'
+  }
+});
+
+api.getInitialCards()
+
 
 function openPopupEditProfile(){
 
