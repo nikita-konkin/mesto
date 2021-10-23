@@ -1,6 +1,6 @@
 import './index.css';
 import {Card} from '../components/card.js';
-import {initialCards} from '../utils/cards.js';
+// import {initialCards} from '../utils/cards.js';
 import {FormValidator} from '../components/formValidator.js'
 import {validationClasses} from '../utils/validationSettings.js'
 import {Section} from '../components/Section.js'
@@ -38,13 +38,13 @@ const template = document.querySelector('#element').content;
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/cards',
+  // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/users/me',
   headers: {
     authorization: '6dcc8eb5-b36f-4e58-925f-68f8caf1b64a',
     'Content-Type': 'application/json'
   }
 });
 
-api.getInitialCards()
 
 
 function openPopupEditProfile(){
@@ -76,14 +76,23 @@ const card = new Card(template,
 		popupWithImage.open(name, link);
 	});
 
-const defaultCardList = new Section({
-  data: initialCards,
+const initialCards = api.getInitialCards()
+initialCards.then(cards =>  {
+	
+	const defaultCardList = new Section({
+  data: cards,
   renderer: (item) => {
     const cardElement = card.cardCreate(item);
     defaultCardList.addItem(cardElement);
   }
-}, container);
-defaultCardList.renderer();
+	}, container);
+
+	defaultCardList.renderer();
+
+})
+
+
+
 
 const userInfo = new UserInfo(profileName, profileCareer);
 userInfo.setUserInfo('Джек Салли', 'Житель Пандоры');
