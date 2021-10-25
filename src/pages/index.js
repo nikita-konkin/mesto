@@ -22,6 +22,8 @@ const formPhoto = document.querySelector('.form_type_add-photo');
 const formPhotoName = document.querySelector('.form__decription-input_type_photo-name');
 const formPhotoLink = document.querySelector('.form__decription-input_type_photo-link');
 
+const formAvatar = document.querySelector('.form_type_avatar-edit');
+
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupProfileCloseButton = document.querySelector('.popup__close-button_type_profile');
 
@@ -34,23 +36,16 @@ const popupPhotoCloseButton = document.querySelector('.popup-photo__close-button
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 
+const profileEditAvatarButton = document.querySelector('.profile__avatar-edit');
+const profileAvatar = document.querySelector('.profile__avatar');
+const profileAvatarCloseButton = document.querySelector('.popup__close-button_avatar-edit');
+const popupEditAvatar = document.querySelector('.popup_type_avatar-edit');
+
 const template = document.querySelector('#element').content;
-
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/cards',
-  // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/users/me',
-  headers: {
-    authorization: '6dcc8eb5-b36f-4e58-925f-68f8caf1b64a',
-    'Content-Type': 'application/json'
-  }
-});
-
-
 
 function openPopupEditProfile(){
 
   popupFormChangeProfile.open();
-
 	formProfileName.value = userInfo.getUserInfo().name;
 	formProfileCareer.value = userInfo.getUserInfo().career;
 
@@ -62,19 +57,36 @@ function openPopupAddNewCard(){
   
 }
 
+function openPopupEditAvatar(){
+	popupFormEditAvatar.open();
+}
+
+const api = new Api({
+  cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/cards',
+  avatarsUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/users/me/avatar',
+  profileUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/users/me',
+  likesUrl: 'https://mesto.nomoreparties.co/v1/cohortId/cards/likes',
+  headers: {
+    authorization: '6dcc8eb5-b36f-4e58-925f-68f8caf1b64a',
+    'Content-Type': 'application/json'
+  }
+});
+
 const editProfileValidator = new FormValidator(validationClasses, formProfile);
 editProfileValidator.enableValidation();
 const addCardValidator = new FormValidator(validationClasses, formPhoto);
 addCardValidator.enableValidation();
+const formAvatarValidator = new FormValidator(validationClasses, formAvatar);
+formAvatarValidator.enableValidation();
 
 const popupWithImage = new PopupWithImage(popupPhoto,
 	popupPhotoImageElement, popupPhotoTitleElement, popupPhotoCloseButton);
 popupWithImage.setEventListeners();
 
-const card = new Card(template, 
+const card = new Card(template,
 	(name, link) => {
 		popupWithImage.open(name, link);
-	});
+	}, api);
 
 const initialCards = api.getInitialCards()
 initialCards.then(cards =>  {
@@ -82,6 +94,7 @@ initialCards.then(cards =>  {
 	const defaultCardList = new Section({
   data: cards,
   renderer: (item) => {
+  	// console.log(item.likes)
     const cardElement = card.cardCreate(item);
     defaultCardList.addItem(cardElement);
   }
@@ -91,24 +104,41 @@ initialCards.then(cards =>  {
 
 })
 
+const userInfo = new UserInfo(profileName, profileCareer, profileAvatar);
+const profileInfo = api.getProfileData()
+profileInfo.then(info => {
+	// console.log(info)
+	userInfo.setUserInfo(info.name, info.about);
+	userInfo.setUserAvatar(info.avatar);
+})
 
 
 
-const userInfo = new UserInfo(profileName, profileCareer);
-userInfo.setUserInfo('Джек Салли', 'Житель Пандоры');
+const popupFormEditAvatar = new PopupWithForm(
+	popupEditAvatar,
+	(link) => {	event.preventDefault();
+							api.patchAvatar(link.link)
+							.then(res => {profileAvatar.src = res.avatar})
+							popupFormEditAvatar.close()},
+	profileAvatarCloseButton,
+	() => {formAvatarValidator.toggleButtonState()}
+	)
+popupFormEditAvatar.setEventListeners();
 
 const popupFormAddPhoto = new PopupWithForm(
 	popupAddPhoto,
-	(data) => {defaultCardList.rendererAdditionalCard(data);
-						popupFormAddPhoto.close()},
+	(data) => {	api.postCard(data.name, data.link)
+							.then(res => {defaultCardList.rendererAdditionalCard(res)});
+							popupFormAddPhoto.close()},
 	popupAddPhotoCloseButton,
 	() => {addCardValidator.toggleButtonState()})
 popupFormAddPhoto.setEventListeners();
 
 const popupFormChangeProfile = new PopupWithForm(
 	popupProfile,
-	(data) => {userInfo.setUserInfo(data.name, data.career);
-						popupFormChangeProfile.close()},
+	(data) => {	api.patchUserInfo(data.name, data.career)
+							.then(res => {userInfo.setUserInfo(res.name, res.about)});
+							popupFormChangeProfile.close()},
 	popupProfileCloseButton,
 	() => {addCardValidator.toggleButtonState()})
 popupFormChangeProfile.setEventListeners();
@@ -117,4 +147,5 @@ popupFormChangeProfile.setEventListeners();
 
 profileEditButton.addEventListener('click', openPopupEditProfile);
 profileAddButton.addEventListener('click', openPopupAddNewCard);
+profileEditAvatarButton.addEventListener('click', openPopupEditAvatar)
 

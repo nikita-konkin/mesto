@@ -59,8 +59,8 @@
         <form id="avatar-edit-form" class="form form_type_avatar-edit">
           <fieldset class="form__set">
             <h2 class="form__header_confirm">Обновить аватар</h2>
-            <input type="url" name="link" id='url-input' class="form__decription-input form__decription-input_type_photo-link" placeholder="Ссылка на картинку" required>
-            <span class="form__input-error url-input-error"></span>
+            <input type="url" name="link" id='url-input' class="form__decription-input form__decription-input_type_avatar-edit" placeholder="Ссылка на аватар" required>
+            <span class="form__input-error url-input-error url-input-error_type_avatar"></span>
             <button type="submit" class="form__submit">Сохранить</button>
           </fieldset>
         </form>
@@ -108,7 +108,8 @@
         <div class="profile__avatar-container">
           <img src="<%=require('./images/avatar_foto.jpg')%>" alt="Фото профиля" class="profile__avatar">
           <div class="profile__avatar-edit_cover">
-            <img src="<%=require('./images/avatar_edit.svg')%>" alt="Редактировать фото" class="profile__avatar-edit">
+            <!-- <img src="<%=require('./images/avatar_edit.svg')%>" alt="Редактировать фото" class="profile__avatar-edit"> -->
+            <button type="button" class="profile__avatar-edit"></button>
           </div>
         </div>
         <div class="profile__description-wrap">
