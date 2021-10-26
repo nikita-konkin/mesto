@@ -15,10 +15,12 @@ export class Card{
 
 	cardCreate(data){
 		// console.log(data)
+		// console.log(data.likes.length)
 
 		this._getTemplate()
-
-
+		this._elementTemplate
+		.querySelector('.element__trash-button').classList.add('element__trash-button_invisible')
+		
 		this._elementTemplate
 		.querySelector('.element__user-photo').src = data.link;
 
@@ -29,41 +31,57 @@ export class Card{
 		.querySelector('.element__user-photo-text').textContent = data.name;
 
 		this._elementTemplate
-		.querySelector('.element__click').textContent = data.likes;
+		.querySelector('.element__click').textContent = data.likes.length;
 
-		this._elementTemplate.querySelector('.element__like').setAttribute("id", data.owner._id);
+		this._elementTemplate.querySelector('.element__like').setAttribute("id", data._id);
 
-		this._setEventListeners(data);
+		if(data.owner.name === document.querySelector('.profile__name').textContent){
+			this._elementTemplate.querySelector('.element__trash-button')
+			.classList.remove('element__trash-button_invisible')
+		}
 
-		
+		this._setEventListeners(data, this._api);
 
 		return this._elementTemplate
 	}
 
-	_setEventListeners(data) {
+	_setEventListeners(data, api) {
 		
+		this._elementTemplate
+		.querySelector('.element__like').addEventListener('click', this._toggleLike.bind(event, api));
 
 		this._elementTemplate
-		.querySelector('.element__like').addEventListener('click', this._toggleLike.bind(this._elementTemplate));
-
-		this._elementTemplate
-		.querySelector('.element__trash-button').addEventListener('click', this._elementTemplate.remove.bind(this._elementTemplate));
+		.querySelector('.element__trash-button').addEventListener('click', () => {this._handleDeleteIconClick(this._elementTemplate)});
 
 		this._elementTemplate.
 		querySelector('.element__user-photo').addEventListener('click', () => {this._handleCardClick(data.name, data.link)});
 
     }
 
-	_toggleLike(event){
-		console.log(event.target.id)
+    _handleDeleteIconClick(elementTemplate, event){
+
+    	this._elementTemplate.remove(elementTemplate)
+    }
+
+	_toggleLike(api, event){
+		// console.log(event.target.nextSibling.nextSibling.textContent)
+		// console.log(api)
 		event.target.classList.toggle('element__like_liked');
 
 		if(Array.from(event.target.classList).includes('element__like_liked')){
-			const putLike = this._api.putLike(event.target.id, 'PUT')
+			api.putLike(event.target.id, 'PUT')
+			.then(res => {
+				event.target.nextSibling.nextSibling.textContent = res.likes.length
+				})
+			.catch(res => {console.log(res)})
 		}else{
-			this._api.putLike(event.target.id, 'DELETE')
+			api.putLike(event.target.id, 'DELETE')
+			.then(res => {
+				event.target.nextSibling.nextSibling.textContent = res.likes.length
+				})
+			.catch(res => {console.log(res)})
+
 		};
-		console.log(event.target.id);
 
 	}
 

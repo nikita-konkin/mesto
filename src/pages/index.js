@@ -6,6 +6,7 @@ import {validationClasses} from '../utils/validationSettings.js'
 import {Section} from '../components/Section.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
+import {PopupWithConfirmation} from '../components/PopupWithConfirmation.js'
 import {UserInfo} from '../components/UserInfo.js'
 import {Api} from '../components/Api.js'
 
@@ -33,6 +34,9 @@ const popupAddPhotoCloseButton = document.querySelector('.popup__close-button_ty
 const popupPhoto = document.querySelector('.popup-photo');
 const popupPhotoCloseButton = document.querySelector('.popup-photo__close-button');
 
+const popupTypeConfirm = document.querySelector('.popup_type_confirm')
+const popupTypeConfirmCloseButton = document.querySelector('.popup__close-button_type_confirm')
+
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 
@@ -41,7 +45,9 @@ const profileAvatar = document.querySelector('.profile__avatar');
 const profileAvatarCloseButton = document.querySelector('.popup__close-button_avatar-edit');
 const popupEditAvatar = document.querySelector('.popup_type_avatar-edit');
 
+const elementTrashButton = document.querySelector('.element__trash-button')
 const template = document.querySelector('#element').content;
+
 
 function openPopupEditProfile(){
 
@@ -65,7 +71,7 @@ const api = new Api({
   cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/cards',
   avatarsUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/users/me/avatar',
   profileUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/users/me',
-  likesUrl: 'https://mesto.nomoreparties.co/v1/cohortId/cards/likes',
+  likesUrl: 'https://mesto.nomoreparties.co/v1/cohort-29/cards/likes',
   headers: {
     authorization: '6dcc8eb5-b36f-4e58-925f-68f8caf1b64a',
     'Content-Type': 'application/json'
@@ -83,10 +89,18 @@ const popupWithImage = new PopupWithImage(popupPhoto,
 	popupPhotoImageElement, popupPhotoTitleElement, popupPhotoCloseButton);
 popupWithImage.setEventListeners();
 
+const popupWithConfirmation = new PopupWithConfirmation(popupTypeConfirm, popupTypeConfirmCloseButton)
+
 const card = new Card(template,
 	(name, link) => {
 		popupWithImage.open(name, link);
-	}, api);
+	},
+	api,
+	{handleDeleteIconClick: () => {
+			const delet = popupWithConfirmation.open()
+
+		}}
+	);
 
 const initialCards = api.getInitialCards()
 initialCards.then(cards =>  {
@@ -111,7 +125,6 @@ profileInfo.then(info => {
 	userInfo.setUserInfo(info.name, info.about);
 	userInfo.setUserAvatar(info.avatar);
 })
-
 
 
 const popupFormEditAvatar = new PopupWithForm(

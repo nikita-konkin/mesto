@@ -50,7 +50,7 @@ export class Api {
 			if(res.ok){
 				return res.json();
 			}
-			return Promise.reject('Error')
+			return Promise.reject(`Ошибка: ${res.status}`)
 		});
 
 	}
@@ -70,7 +70,7 @@ export class Api {
 				return res.json();
 			}
 
-			return Promise.reject('Error')
+			return Promise.reject(`Ошибка: ${res.status}`)
 		});
 
 	}
@@ -90,27 +90,24 @@ export class Api {
 				return res.json();
 			}
 
-			return Promise.reject('Error')
+			return Promise.reject(`Ошибка: ${res.status}`)
 		});
 
 	}
 
 	putLike(cardId, method){
-		console.log(cardId)
-		console.log(method)
+		// console.log(cardId)
+		// console.log(method)
 		return fetch(this._likesUrl+`/${cardId}`, {
 		  method: method,
-		  headers: this._headers,
-		  body: JSON.stringify({
-		    likes: ''
-		  })
+		  headers: this._headers
 		})
 		.then(res => {
 			if(res.ok){
 				return res.json();
 			}
 
-			return Promise.reject('Error')
+			return Promise.reject(`Ошибка: ${res.status}`)
 		});
 
 

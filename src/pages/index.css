@@ -45,6 +45,7 @@
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__trash-button/element__trash-button.css);
+@import url(../blocks/element/__trash-button/_invisible/element__trash-button_invisible.css);
 @import url(../blocks/element/__user-photo/element__user-photo.css);
 @import url(../blocks/element/__user-photo-description/element__user-photo-description.css);
 @import url(../blocks/element/__user-photo-text/element__user-photo-text.css);
