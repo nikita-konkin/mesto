@@ -4,8 +4,6 @@ export class PopupWithImage extends Popup{
 	constructor(popupSelector, popupPhotoImageSelector, popupPhotoTitleSelector, closeButton){
 		super(popupSelector, closeButton);
 		
-		// this._name = name;
-		// this._link = link;
 		this._photoSelector = popupSelector.querySelector(popupPhotoTitleSelector);
 		this._titleSelector = popupSelector.querySelector(popupPhotoImageSelector);
 	}

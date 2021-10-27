@@ -1,9 +1,10 @@
 export class Card{
 
-	constructor(template, handlePreviewPicture, api){
+	constructor(template, handlePreviewPicture, api, {handleDeleteIconClick}){
 		this._template = template;
 		this._handleCardClick = handlePreviewPicture;
 		this._api = api
+		this._handleDeleteIconClick = handleDeleteIconClick
 	}
 
 	_getTemplate() {
@@ -14,8 +15,6 @@ export class Card{
 	}
 
 	cardCreate(data){
-		// console.log(data)
-		// console.log(data.likes.length)
 
 		this._getTemplate()
 		this._elementTemplate
@@ -51,16 +50,13 @@ export class Card{
 		.querySelector('.element__like').addEventListener('click', this._toggleLike.bind(event, api));
 
 		this._elementTemplate
-		.querySelector('.element__trash-button').addEventListener('click', () => {this._handleDeleteIconClick(this._elementTemplate)});
+		.querySelector('.element__trash-button')
+		.addEventListener('click', (event) => {this._handleDeleteIconClick(event)});
+		// .querySelector('.element__trash-button').addEventListener('click', () => {this._handleDeleteIconClick(this._elementTemplate)});
 
 		this._elementTemplate.
 		querySelector('.element__user-photo').addEventListener('click', () => {this._handleCardClick(data.name, data.link)});
 
-    }
-
-    _handleDeleteIconClick(elementTemplate, event){
-
-    	this._elementTemplate.remove(elementTemplate)
     }
 
 	_toggleLike(api, event){

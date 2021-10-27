@@ -7,7 +7,6 @@ export class PopupWithForm extends Popup{
 		this._toggleButtonState = toggleButtonState;
 		this._popupForm = document.getElementById("photo-edit-form");
 		this._popupAvatarForm = document.getElementById("avatar-edit-form");
-		// this._api = api
 	}
 
 	_getInputValues(){
@@ -27,16 +26,6 @@ export class PopupWithForm extends Popup{
 		super.setEventListeners();
 
 	}
-
-	// setEventListeners2(){
-	// 	// console.log(this._getInputValues().link)
-
-	// 	this._popupSelector.addEventListener('submit', ()=>{
-	// 		// const patchAvatar = this._api.patchAvatar(this._getInputValues().link);
-	// 		this._renderer(this._getInputValues())});
-	// 	super.setEventListeners();
-
-	// }
 
 	close(){
 

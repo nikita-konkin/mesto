@@ -1,13 +1,10 @@
 export class Api {
-// Токен: 6dcc8eb5-b36f-4e58-925f-68f8caf1b64a
-// Идентификатор группы: cohort-29
   constructor(config) {
     this._cardsUrl = config.cardsUrl;
     this._profileUrl = config.profileUrl;
     this._avatarsUrl = config.avatarsUrl;
     this._headers = config.headers;
     this._likesUrl = config.likesUrl;
-    console.log(this._headers)
   }
 
   getInitialCards() {
@@ -95,9 +92,24 @@ export class Api {
 
 	}
 
+  deleteCard(cardId) {
+
+		return fetch(this._cardsUrl+`/${cardId}`, {
+		  method: 'DELETE',
+		  headers: this._headers
+		})
+		.then(res => {
+			if(res.ok){
+				return res.json();
+			}
+
+			return Promise.reject(`Ошибка: ${res.status}`)
+		});
+
+	}
+
 	putLike(cardId, method){
-		// console.log(cardId)
-		// console.log(method)
+
 		return fetch(this._likesUrl+`/${cardId}`, {
 		  method: method,
 		  headers: this._headers
