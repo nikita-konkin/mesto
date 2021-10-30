@@ -12,12 +12,13 @@ export class Api {
 		return fetch(this._cardsUrl, {
 			method: "GET",
 			headers: this._headers})
-			.then(res => res.json())
-			.then((result) => {
-				// console.log(result);
-				return result
-			})
-			.catch(err => {console.log(err)});
+			// .then(res => res.json())
+			.then(res => {
+				if(res.ok){
+					return res.json();
+				}
+				return Promise.reject(`Ошибка: ${res.status}`)
+			});
   }
 
   getProfileData() {
@@ -25,12 +26,13 @@ export class Api {
 		return fetch(this._profileUrl, {
 			method: "GET",
 			headers: this._headers})
-			.then(res => res.json())
-			.then((result) => {
-				// console.log(result);
-				return result
-			})
-			.catch(err => {console.log(err)});
+			// .then(res => res.json())
+			.then(res => {
+				if(res.ok){
+					return res.json();
+				}
+				return Promise.reject(`Ошибка: ${res.status}`)
+			});
 
   }
 
@@ -94,7 +96,7 @@ export class Api {
 
   deleteCard(cardId) {
 
-		return fetch(this._cardsUrl+`/${cardId}`, {
+		return fetch(`${this._cardsUrl}/${cardId}`, {
 		  method: 'DELETE',
 		  headers: this._headers
 		})
@@ -110,7 +112,7 @@ export class Api {
 
 	putLike(cardId, method){
 
-		return fetch(this._likesUrl+`/${cardId}`, {
+		return fetch(`${this._likesUrl}/${cardId}`, {
 		  method: method,
 		  headers: this._headers
 		})

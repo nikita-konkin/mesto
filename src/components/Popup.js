@@ -39,8 +39,16 @@ export class Popup{
 
 	close(){
 
-		this._popupSelector.classList.remove('popup_opened');
-		document.removeEventListener('keydown', this._handleEscClose);
+		this._popupSelector.classList.add('popup_closed');
+		setTimeout(function(popupSelector) {
+			popupSelector.classList.remove('popup_opened');
+			popupSelector.classList.remove('popup_closed');
+			
+			document.removeEventListener('keydown', this._handleEscClose);
+
+		}, 400, this._popupSelector);
+
+
 
 	}
 
