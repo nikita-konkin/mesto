@@ -1,38 +1,38 @@
-import {Popup} from './Popup.js'
+import { Popup } from './Popup.js'
 
-export class PopupWithForm extends Popup{
-	constructor(popupSelector, renderer, closeButton, toggleButtonState){
-		super(popupSelector, closeButton);
-		this._renderer = renderer;
-		this._toggleButtonState = toggleButtonState;
-		this._popupForm = document.getElementById("photo-edit-form");
-		this._popupAvatarForm = document.getElementById("avatar-edit-form");
-	}
+export class PopupWithForm extends Popup {
+    constructor(popupSelector, renderer, closeButton, toggleButtonState) {
+        super(popupSelector, closeButton);
+        this._renderer = renderer;
+        this._toggleButtonState = toggleButtonState;
+        this._popupForm = document.getElementById("photo-edit-form");
+        this._popupAvatarForm = document.getElementById("avatar-edit-form");
+    }
 
-	_getInputValues(){
+    _getInputValues() {
 
-		this._newObject = {}
-		this._popupSelector.querySelectorAll('input').forEach(element => {
-			this._newObject[element.name] = element.value;
-		});
-		
-		return this._newObject
+        this._newObject = {}
+        this._popupSelector.querySelectorAll('input').forEach(element => {
+            this._newObject[element.name] = element.value;
+        });
 
-	}
+        return this._newObject
 
-	setEventListeners(){
-		
-		this._popupSelector.addEventListener('submit', ()=>{this._renderer(this._getInputValues())});
-		super.setEventListeners();
+    }
 
-	}
+    setEventListeners() {
 
-	close(){
+        this._popupSelector.addEventListener('submit', () => { this._renderer(this._getInputValues()) });
+        super.setEventListeners();
 
-		this._popupForm.reset();
-		this._popupAvatarForm.reset();
-		this._toggleButtonState();
-		super.close();
+    }
 
-	}
+    close() {
+
+        this._popupForm.reset();
+        this._popupAvatarForm.reset();
+        this._toggleButtonState();
+        super.close();
+
+    }
 }

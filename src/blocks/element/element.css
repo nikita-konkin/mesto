@@ -1,10 +1,13 @@
 .element{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
 	position: relative;
 	background-color: white;
 	min-width: 282px;
-	/*max-height: 361px;*/
+	min-height: 361px;
 	border-radius: 10px;
 	overflow: hidden;
 
-	justify-self: center;
+	/*justify-self: center;*/
 }

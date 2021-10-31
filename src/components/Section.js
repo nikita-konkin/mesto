@@ -1,35 +1,34 @@
+export class Section {
+    constructor({ data, renderer }, containerSelector) {
+        this._renderer = renderer;
+        this._container = document.querySelector(containerSelector);
+    }
 
-export class Section{
-	constructor({ data, renderer }, containerSelector){
-		this._renderer = renderer;
-		this._container = document.querySelector(containerSelector);
-	}
+    _clear() {
 
-	_clear(){
+        this._container.innerHTML = '';
 
-		this._container.innerHTML = '';
+    }
 
-	}
+    addItem(element) {
 
-	addItem(element){
+        this._container.prepend(element);
 
-		this._container.prepend(element);
+    }
 
-	}
+    renderer(items) {
 
-	renderer(items){
+        this._clear();
+        items.forEach(item => {
+            this._renderer(item);
+        });
 
-		this._clear();
-		items.forEach(item =>{
-			this._renderer(item);
-		});
+    }
 
-	}
+    rendererAdditionalCard(data) {
 
-	rendererAdditionalCard(data){
+        this._renderer(data);
 
-		this._renderer(data);
-		
-	}
+    }
 
 }
